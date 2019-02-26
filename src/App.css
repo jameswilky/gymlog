@@ -1,33 +1,66 @@
-.App {
+* {
+  /* CSS Reset*/
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body,
+html {
+  font-family: "Raleway", sans-serif;
+}
+
+:root {
+  --primary: #344a72;
+  --secondary: #49c1a2;
+  --secondary-dark: #37a08e;
+}
+
+#root {
+}
+
+#header,
+#footer,
+#content {
+  position: absolute;
+  right: 0;
+  left: 0;
+}
+
+#header {
+  height: 75px;
+  top: 0;
+  background-color: var(--primary);
+  color: #fff;
+  padding: 20px;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+#header i {
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#footer {
+  height: 75px;
+  bottom: 0;
+  background-color: var(--primary);
+  color: #fff;
+  font-size: 2em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-content: center;
 }
 
-.App-link {
-  color: #61dafb;
+.divider {
+  position: relative;
+  left: 92%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#content {
+  top: 75px;
+  bottom: 75px;
+  overflow: auto;
+}
+
+.container {
+  margin: 20px;
 }
