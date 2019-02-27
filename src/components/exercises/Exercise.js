@@ -1,11 +1,16 @@
 import React, { Component } from "react";
+import Set from "./Set";
 
 import "./exercise.css";
 
 class Exercise extends Component {
   state = {
-    showExercise: true
+    showExercise: false
   };
+
+  addSet() {
+    console.log("Add set");
+  }
   render() {
     const { showExercise } = this.state;
     return (
@@ -50,25 +55,16 @@ class Exercise extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr className="rep">
-                  <td> 1 </td>
-                  <td>
-                    <i className="fas fa-minus minusRep" />
-                  </td>
-                  <td> 5</td>
-                  <td>
-                    <i className="fas fa-plus addRep" />
-                  </td>
-                  <td>
-                    <i className="fas fa-minus minusSet" />
-                  </td>
-                </tr>
+                <Set reps={5} set={1} />
+                <Set reps={5} set={2} />
+                <Set reps={5} set={3} />
+                <Set reps={5} set={4} />
               </tbody>
             </table>
-            <hr />
-
             <button className="addSet">
-              <i className="fas fa-plus"> </i>
+              <i className="fas fa-plus" onClick={() => this.addSet()}>
+                {" "}
+              </i>
             </button>
 
             <hr />

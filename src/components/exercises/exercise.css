@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns: 1fr 100fr 1fr;
   grid-gap: 10px;
+  padding-top: 12px;
 }
 
 .exercise__body hr {
@@ -60,7 +61,8 @@
 .exercise__container {
   border: 1px solid #eee;
   border-radius: 5px;
-  padding: 10px;
+  padding: 15px;
+  margin: 15px;
 }
 
 .exercise__body .addRep {
@@ -79,15 +81,20 @@
 }
 
 .addSet {
-  text-align: center;
-  margin: 5px 50%;
   width: 10px;
   font-size: 1.5em;
+  margin: auto 50%;
+}
+
+.addSet i {
+  margin-left: -11px;
+  margin-top: 10px;
 }
 
 .minusSet {
   color: white;
   background-color: var(--danger);
-  padding: 5px;
+  padding: 3px;
+  font-size: 0.8em;
   border-radius: 90px;
 }
