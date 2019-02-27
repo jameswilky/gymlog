@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 
-import Card from "./Card";
+import Workout from "../workouts/Workout";
 
 class Content extends Component {
   render() {
     return (
       <div className="content">
         <div className="container">
-          <Card />
+          <Workout />
+        </div>
+        <div className="content__add ">
+          <i className="fas fa-play" />
         </div>
       </div>
     );

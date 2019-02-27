@@ -15,6 +15,7 @@ html {
   --secondary: #49c1a2;
   --secondary-dark: #37a08e;
   --danger: #db2b39;
+  --shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* TIPS NOTES */
@@ -86,6 +87,19 @@ content = grid itself
   overflow: auto;
 }
 
+/* Main Button*/
+.content__add {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  font-size: 2.5em;
+  color: white;
+  background-color: var(--secondary);
+  border-radius: 90px;
+  padding: 20px 25px 20px 25px;
+  box-shadow: var(--shadow);
+}
+
 .container {
 }
 
@@ -95,6 +109,8 @@ content = grid itself
   border: 1px solid #cccccc;
   border-radius: 5px;
   margin: 15px;
+  background-color: #fff;
+  box-shadow: var(--shadow);
 }
 
 .card__header {
@@ -110,12 +126,12 @@ tbody {
 }
 
 .card__body {
-  padding: 10px;
+  padding: 10px 10px 10px 0;
 }
 
 .card__footer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   margin-right: 10px;
 }
 

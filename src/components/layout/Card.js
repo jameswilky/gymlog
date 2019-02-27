@@ -6,12 +6,13 @@ class Card extends Component {
 
   render() {
     const { showCard } = this.state;
+    const { header, icon } = this.props;
 
     return (
       <div className="card">
         <div className="card__header">
           <div>
-            <h3>Workout 1</h3>
+            <h3>{header}</h3>
           </div>
           <div>
             <i
@@ -24,7 +25,7 @@ class Card extends Component {
         {showCard ? (
           <React.Fragment>
             <div className="card__body">
-              <table>
+              {/* <table>
                 <thead>
                   <th> Excercise</th>
                   <th> Reps </th>
@@ -45,7 +46,7 @@ class Card extends Component {
                     <td> 120 </td>
                   </tr>
                 </tbody>
-              </table>
+              </table> */}
             </div>
             <div className="card__footer">
               <button className="card__Add">
