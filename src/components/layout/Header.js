@@ -3,9 +3,9 @@ import React, { Component } from "react";
 class Header extends Component {
   render() {
     return (
-      <div id="header">
+      <div className="header">
         <h1>GymLog</h1>
-        {/* <i className="fas fa-cog" /> */}
+        <i className="fas fa-cog" />
       </div>
     );
   }

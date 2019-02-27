@@ -7,6 +7,7 @@
 body,
 html {
   font-family: "Raleway", sans-serif;
+  line-height: 1.6em;
 }
 
 :root {
@@ -15,18 +16,24 @@ html {
   --secondary-dark: #37a08e;
 }
 
-#root {
-}
+/* TIPS NOTES */
+/*
+Align = Y = Up/Down
+Justidy = X = Left/Right
 
-#header,
-#footer,
-#content {
+Items = items in grid
+content = grid itself
+*/
+
+.header,
+.footer,
+.content {
   position: absolute;
   right: 0;
   left: 0;
 }
 
-#header {
+.header {
   height: 75px;
   top: 0;
   background-color: var(--primary);
@@ -35,32 +42,65 @@ html {
   text-align: center;
 }
 
-#header i {
+.header i {
+  font-size: 1.5em;
+  position: absolute;
+  top: 25px;
+  right: 25px;
 }
 
-#footer {
+/*Footer */
+.footer {
   height: 75px;
   bottom: 0;
   background-color: var(--primary);
   color: #fff;
   font-size: 2em;
   display: grid;
+  align-items: center;
+}
+
+.iconContainer {
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
-  align-content: center;
+  width: 100%;
 }
-
+.dividerOverlay {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: right;
+  width: 100%;
+}
 .divider {
-  position: relative;
-  left: 92%;
+  color: var(--secondary);
+  margin-right: -4px; /* Line up with grid */
 }
 
-#content {
+/*Content*/
+.content {
   top: 75px;
   bottom: 75px;
   overflow: auto;
 }
 
 .container {
-  margin: 20px;
+}
+
+.card {
+  display: grid;
+  padding: 10px 0px 0px 10px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  margin: 15px;
+}
+
+.card__header {
+  display: grid;
+  grid-template-columns: 7fr 1fr 1fr 1fr;
+}
+
+.card__body {
+  padding: 10px;
 }
