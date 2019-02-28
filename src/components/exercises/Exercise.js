@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Set from "./Set";
+import Set from "./sets/Set";
 
-import "./exercise.css";
+import styles from "./exercise.module.css";
 
 class Exercise extends Component {
   state = {
@@ -13,19 +13,20 @@ class Exercise extends Component {
   }
   render() {
     const { showExercise } = this.state;
+    const { name, tags, sets } = this.props.exercise;
     return (
-      <div className="exercise__container">
-        <div className="exercise__header">
+      <div className={styles.container}>
+        <div className={styles.header}>
           <div>
-            <h3>Squat</h3>
+            <h3>{name}</h3>
           </div>
           {!showExercise ? (
-            <div className="tag__container__header">
-              <div className="tag"> Low Bar</div>
-              <div className="tag"> Paused </div>
-              <div className="tag"> Wide Stance </div>
+            <div className={styles.tagContainer}>
+              {tags.map(tag => (
+                <div className={styles.tag}>{tag}</div>
+              ))}
 
-              <div className="newTag">
+              <div className={styles.createTagBtn}>
                 <i className="fas fa-plus" />
                 New Tag
               </div>
@@ -43,7 +44,7 @@ class Exercise extends Component {
           <i />
         </div>
         {showExercise ? (
-          <div className="exercise__body">
+          <div className={styles.body}>
             <hr />
             <table>
               <thead>
@@ -55,25 +56,27 @@ class Exercise extends Component {
                 </tr>
               </thead>
               <tbody>
-                <Set reps={5} set={1} />
-                <Set reps={5} set={2} />
-                <Set reps={5} set={3} />
-                <Set reps={5} set={4} />
+                {sets.map((reps, set) => (
+                  /* Takes in an array, each value represents the number of reps,
+                     'set' represents the set order
+                  */
+                  <Set reps={reps} set={set} />
+                ))}
               </tbody>
             </table>
-            <button className="addSet">
+            <button className={styles.add}>
               <i className="fas fa-plus" onClick={() => this.addSet()}>
                 {" "}
               </i>
             </button>
 
             <hr />
-            <div className="tag__container__body">
-              <div className="tag"> Low Bar</div>
-              <div className="tag"> Paused </div>
-              <div className="tag"> Wide Stance </div>
+            <div className={styles.tagContainer}>
+              {tags.map(tag => (
+                <div className={styles.tag}>{tag}</div>
+              ))}
 
-              <div className="newTag">
+              <div className={styles.createTagBtn}>
                 <i className="fas fa-plus" />
                 New Tag
               </div>

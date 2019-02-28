@@ -1,0 +1,6 @@
+.selected {
+  color: var(--secondary);
+}
+.circle {
+  font-size: 1.5em;
+}

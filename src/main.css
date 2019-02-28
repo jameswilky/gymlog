@@ -1,0 +1,173 @@
+/* This style sheet contains all styled global classes
+  Specific styles are overwritten in modules specific to each component
+*/
+
+* {
+  /* CSS Reset*/
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body,
+html {
+  font-family: "Raleway", sans-serif;
+  line-height: 1.6em;
+}
+
+:root {
+  --primary: #344a72;
+  --secondary: #49c1a2;
+  --secondary-dark: #37a08e;
+  --danger: #ff4c46;
+  --shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* TIPS NOTES */
+/*
+Align = Y = Up/Down
+Justidy = X = Left/Right
+
+Items = items in grid
+content = grid itself
+*/
+
+.header,
+.footer,
+.content {
+  position: absolute;
+  right: 0;
+  left: 0;
+}
+
+.header {
+  height: 75px;
+  top: 0;
+  background-color: var(--primary);
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.header i {
+  font-size: 1.5em;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+}
+
+/*Footer */
+.footer {
+  height: 75px;
+  bottom: 0;
+  background-color: var(--primary);
+  color: #fff;
+  font-size: 2em;
+  display: grid;
+  align-items: center;
+}
+
+.iconContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  width: 100%;
+}
+.dividerOverlay {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: right;
+  width: 100%;
+}
+.divider {
+  color: var(--secondary);
+  margin-right: -4px; /* Line up with grid */
+}
+
+/*Content*/
+.content {
+  top: 75px;
+  bottom: 75px;
+  overflow: auto;
+}
+
+/* Main Button*/
+.main__button {
+  position: fixed;
+  right: 15px;
+  bottom: 85px;
+  font-size: 1.5em;
+  color: white;
+  border-radius: 90px;
+  padding: 20px 25px 20px 25px;
+  box-shadow: var(--shadow);
+}
+
+.start {
+  background-color: var(--secondary);
+}
+
+.add {
+  background-color: var(--danger);
+}
+
+.container {
+  text-align: center;
+  margin-top: 15px;
+}
+.container > h2 {
+  color: var(--secondary);
+}
+
+.card {
+  display: grid;
+  padding: 10px 0px 10px 10px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  margin: 15px;
+  background-color: #fff;
+  box-shadow: var(--shadow);
+}
+
+.card__header {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr 8fr 1fr;
+}
+
+.card__body table {
+  width: 100%;
+}
+tbody {
+  text-align: center;
+}
+
+.card__body {
+  padding: 10px 10px 10px 0;
+}
+
+.card__footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-right: 10px;
+}
+
+button {
+  color: white;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  font-size: 0.8em;
+
+  background-color: white;
+  color: var(--secondary);
+}
+
+button i {
+  margin-right: 5px;
+}
+
+.card__edit {
+}
+.card__delete {
+  color: var(--danger);
+}
