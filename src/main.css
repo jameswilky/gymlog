@@ -87,7 +87,7 @@ content = grid itself
 /*Content*/
 .content {
   top: 75px;
-  bottom: 75px;
+  bottom: 150px;
   overflow: auto;
 }
 

@@ -5,8 +5,18 @@ import styles from "./workout.module.css";
 
 class Workout extends Component {
   state = {
-    showCard: false
+    showCard: false,
+    name: ""
   };
+
+  componentDidMount() {
+    /* On Load pass workout name into local state */
+    console.log(this.props);
+    const { name } = this.props.workout;
+    this.setState({
+      name
+    });
+  }
 
   onSelectClick = id => {
     this.props.selectClickHandler(id);
@@ -14,10 +24,20 @@ class Workout extends Component {
   onAddExerciseClick = id => {
     this.props.addExerciseHandler(id);
   };
+  onDeleteWorkoutClick = id => {
+    this.props.deleteWorkoutHandler(id);
+  };
+
+  onChange = e => {
+    /* Update local state on each click*/
+    /* @todo look up focus/blur to submit after clicking away */
+
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
-    const { showCard } = this.state;
-    const { id, name, exercises } = this.props.workout;
+    const { showCard, name } = this.state;
+    const { id, exercises } = this.props.workout;
     const { selected } = this.props;
 
     return (
@@ -37,7 +57,13 @@ class Workout extends Component {
             )}
           </div>
           <div>
-            <h2>{name}</h2>
+            <input
+              type="text"
+              name={"name"}
+              onChange={this.onChange}
+              value={name}
+              className={`${styles.heading}`}
+            />
           </div>
           <div>
             <i
@@ -64,7 +90,10 @@ class Workout extends Component {
                 Add
               </button>
 
-              <button className="card__delete">
+              <button
+                className="card__delete"
+                onClick={() => this.onDeleteWorkoutClick(id)}
+              >
                 <i className="fas fa-trash" />
                 Delete
               </button>

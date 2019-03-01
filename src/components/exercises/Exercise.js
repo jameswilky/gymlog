@@ -28,11 +28,6 @@ class Exercise extends Component {
                   {tag}
                 </div>
               ))}
-
-              <div className={styles.createTagBtn}>
-                <i className="fas fa-plus" />
-                New Tag
-              </div>
             </div>
           ) : (
             <div />

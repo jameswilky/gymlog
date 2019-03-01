@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import Workout from "../workouts/Workout";
 import uuid from "uuid";
-import Exercise from "../exercises/Exercise";
 
 class WorkoutLauncher extends Component {
   state = {
@@ -88,6 +87,13 @@ class WorkoutLauncher extends Component {
       workouts: [...this.state.workouts, newWorkout]
     });
   };
+
+  deleteWorkout = id => {
+    this.setState({
+      ...this.state,
+      workouts: this.state.workouts.filter(workout => workout.id != id)
+    });
+  };
   clearSelections = e => {
     /* Temporary */
     const clickedContainer = e.target.classList.contains("container");
@@ -98,17 +104,29 @@ class WorkoutLauncher extends Component {
     }
   };
 
+  containsWorkouts = () => {
+    return (
+      typeof this.state.workouts !== "undefined" &&
+      this.state.workouts.length > 0
+    );
+  };
+
   render() {
     const { selectedWorkout, workouts } = this.state;
 
     return (
       <div className="content" onClick={this.clearSelections}>
         <div className="container">
-          {selectedWorkout.id ? (
-            <h2>Start your Workout!</h2>
+          {this.containsWorkouts() ? (
+            selectedWorkout.id ? (
+              <h2>Start your Workout!</h2>
+            ) : (
+              <h2>Select A Workout</h2>
+            )
           ) : (
-            <h2>Select A Workout</h2>
+            <h2>Create a Workout</h2>
           )}
+
           {workouts.map(workout => (
             <Workout
               key={workout.id}
@@ -116,6 +134,7 @@ class WorkoutLauncher extends Component {
               selected={selectedWorkout.id == workout.id}
               selectClickHandler={this.selectWorkout.bind(this, workout.id)}
               addExerciseHandler={this.addExercise.bind(this, workout.id)}
+              deleteWorkoutHandler={this.deleteWorkout.bind(this, workout.id)}
             />
           ))}
         </div>
