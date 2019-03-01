@@ -13,8 +13,9 @@ class Workout extends Component {
   };
 
   render() {
-    const { showCard, selected } = this.state;
+    const { showCard } = this.state;
     const { id, name, exercises } = this.props.workout;
+    const { selected } = this.props;
 
     return (
       <div className="card">

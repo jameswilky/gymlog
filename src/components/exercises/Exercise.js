@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Set from "./sets/Set";
 
 import styles from "./exercise.module.css";
+import uuid from "uuid";
 
 class Exercise extends Component {
   state = {
@@ -23,7 +24,9 @@ class Exercise extends Component {
           {!showExercise ? (
             <div className={styles.tagContainer}>
               {tags.map(tag => (
-                <div className={styles.tag}>{tag}</div>
+                <div className={styles.tag} key={uuid()}>
+                  {tag}
+                </div>
               ))}
 
               <div className={styles.createTagBtn}>
@@ -60,7 +63,7 @@ class Exercise extends Component {
                   /* Takes in an array, each value represents the number of reps,
                      'set' represents the set order
                   */
-                  <Set reps={reps} set={set} />
+                  <Set reps={reps} set={set} key={uuid()} />
                 ))}
               </tbody>
             </table>
@@ -73,7 +76,9 @@ class Exercise extends Component {
             <hr />
             <div className={styles.tagContainer}>
               {tags.map(tag => (
-                <div className={styles.tag}>{tag}</div>
+                <div className={styles.tag} key={uuid()}>
+                  {tag}
+                </div>
               ))}
 
               <div className={styles.createTagBtn}>
