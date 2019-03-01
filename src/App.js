@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./main.css";
 import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
-import Content from "./components/layout/Content";
+import WorkoutLauncher from "./components/workouts/WorkoutLauncher";
 
 class App extends Component {
   render() {
@@ -10,7 +10,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <Header />
-          <Content />
+          <WorkoutLauncher />
           <Footer />
         </header>
       </div>

@@ -11,6 +11,9 @@ class Workout extends Component {
   onSelectClick = id => {
     this.props.selectClickHandler(id);
   };
+  onAddExerciseClick = id => {
+    this.props.addExerciseHandler(id);
+  };
 
   render() {
     const { showCard } = this.state;
@@ -53,7 +56,10 @@ class Workout extends Component {
             </div>
 
             <div className="card__footer">
-              <button className="card__add">
+              <button
+                className="card__add"
+                onClick={() => this.onAddExerciseClick(id)}
+              >
                 <i className="fas fa-plus"> </i>
                 Add
               </button>

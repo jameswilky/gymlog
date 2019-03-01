@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 
 import Workout from "../workouts/Workout";
+import uuid from "uuid";
+import Exercise from "../exercises/Exercise";
 
-class Content extends Component {
+class WorkoutLauncher extends Component {
   state = {
     selectedWorkout: {
       id: null
@@ -38,26 +40,54 @@ class Content extends Component {
   };
 
   selectWorkout = id => {
-    const nextState = {
+    this.setState({
       ...this.state, // Get State
-      // workouts: this.state.workouts.map(
-      //   (
-      //     workout // Get workouts in state,
-      //     // for each workout in array of workouts
-      //   ) =>
-      //     workout.id === id
-      //       ? (workout.selected = true) // If Matches id, select
-      //       : (workout.selected = false) // Else deslect
-      // ),
       selectedWorkout: this.state.workouts.find(
         // Assign selectedWorkout as the selected workout object
         workout => workout.id == id
       )
-    };
-
-    this.setState({ selectedWorkout: nextState.selectedWorkout });
+    });
   };
 
+  addExercise = id => {
+    const newExercise = {
+      id: uuid(),
+      name: "Exercise Name",
+      tags: [],
+      sets: []
+    };
+
+    this.setState({
+      ...this.state, //Get State
+      // Assign workouts array with in state
+      workouts: this.state.workouts.map(workout =>
+        //For each workout in the workouts array, check if the id matches
+        workout.id === id
+          ? // If it does, return an object that:
+            /* 
+        1. Gets the matched workout object with "...workout",
+        2. Assigns exercises array in the work out object to:
+        3. An Array that gets the exercise array and then concatonates the new exercise object
+        */
+            { ...workout, exercises: [...workout.exercises, newExercise] }
+          : // Otherwise, assign the workout object to its previous state
+            workout
+      )
+    });
+  };
+
+  addWorkout = () => {
+    const newWorkout = {
+      id: uuid(),
+      name: "New Workout",
+      exercises: []
+    };
+
+    this.setState({
+      ...this.state,
+      workouts: [...this.state.workouts, newWorkout]
+    });
+  };
   clearSelections = e => {
     /* Temporary */
     const clickedContainer = e.target.classList.contains("container");
@@ -85,6 +115,7 @@ class Content extends Component {
               workout={workout}
               selected={selectedWorkout.id == workout.id}
               selectClickHandler={this.selectWorkout.bind(this, workout.id)}
+              addExerciseHandler={this.addExercise.bind(this, workout.id)}
             />
           ))}
         </div>
@@ -92,9 +123,10 @@ class Content extends Component {
         {selectedWorkout.id ? (
           <div className="main__button start">
             <i className="fas fa-play" />
+            {/* Will Start workout */}
           </div>
         ) : (
-          <div className="main__button add">
+          <div className="main__button add" onClick={this.addWorkout}>
             <i className="fas fa-plus" />
           </div>
         )}
@@ -103,4 +135,4 @@ class Content extends Component {
   }
 }
 
-export default Content;
+export default WorkoutLauncher;
