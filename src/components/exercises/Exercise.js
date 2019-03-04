@@ -6,20 +6,49 @@ import uuid from "uuid";
 
 class Exercise extends Component {
   state = {
-    showExercise: false
+    showExercise: false,
+    name: ""
   };
+
+  componentDidMount() {
+    /* On Load pass workout name into local state */
+    console.log(this.props);
+    const { name } = this.props.exercise;
+    this.setState({
+      name
+    });
+  }
 
   addSet() {
     console.log("Add set");
   }
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
   render() {
-    const { showExercise } = this.state;
-    const { name, tags, sets } = this.props.exercise;
+    const { showExercise, name } = this.state;
+    const { tags, sets } = this.props.exercise;
     return (
       <div className={styles.container}>
         <div className={styles.header}>
           <div>
-            <h3>{name}</h3>
+            <input
+              style={{
+                textAlign: showExercise ? "center" : "left"
+              }}
+              type="text"
+              name={"name"}
+              onChange={this.onChange}
+              value={name}
+              className={`${styles.heading}`}
+              onKeyPress={e => {
+                // Blur on Enter
+                if (e.key === "Enter") {
+                  e.target.blur();
+                }
+              }}
+            />
           </div>
           {!showExercise ? (
             <div className={styles.tagContainer}>
@@ -80,6 +109,12 @@ class Exercise extends Component {
                 <i className="fas fa-plus" />
                 New Tag
               </div>
+            </div>
+            <div className={styles.footer}>
+              <button>
+                <i className="fas fa-trash" />
+                Delete
+              </button>
             </div>
           </div>
         ) : null}

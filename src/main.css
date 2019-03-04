@@ -135,6 +135,14 @@ content = grid itself
   grid-template-columns: 1fr 8fr 1fr;
 }
 
+.card__title {
+  border: none;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Raleway";
+  font-weight: bold;
+}
+
 .card__body table {
   width: 100%;
 }
@@ -148,8 +156,7 @@ tbody {
 
 .card__footer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-right: 10px;
+  grid-template-columns: 1fr;
 }
 
 button {
