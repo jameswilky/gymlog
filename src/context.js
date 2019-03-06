@@ -3,38 +3,38 @@ import uuid from "uuid";
 
 const Context = React.createContext();
 
-const updateSet = (newSet, state, action) => {
-  return {
-    ...state, // Get state
-    workouts: state.workouts.map((
-      workout // Map Each workout in workouts array if:
-    ) =>
-      // The exercises within the workout contiain an exercise which matches target ID
-      workout.exercises.some(exercise => exercise.id === action.payload.id)
-        ? {
-            // Then,
-            ...workout, //get that workout
-            exercises: workout.exercises.map(exercise => {
-              // map each exercise within that workout if:
-              // the exercise matches the payload
-              return exercise.id === action.payload.id
-                ? {
-                    ...exercise,
-                    sets: newSet(exercise)
-                  }
-                : // Otherwise, return an unmodifed exercise object
-                  exercise;
-            })
-          }
-        : // Otherwise, return an unmodifed workout object
-          workout
-    )
-  };
-};
-
 const reducer = (state, action) => {
+  const findSet = func => {
+    // Helper function to find set nested in state
+    return {
+      ...state, // Get state
+      workouts: state.workouts.map((
+        workout // Map Each workout in workouts array if:
+      ) =>
+        // The exercises within the workout contiain an exercise which matches target ID
+        workout.exercises.some(exercise => exercise.id === action.payload.id)
+          ? {
+              // Then,
+              ...workout, //get that workout
+              exercises: workout.exercises.map(exercise => {
+                // map each exercise within that workout if:
+                // the exercise matches the payload
+                return exercise.id === action.payload.id
+                  ? {
+                      ...exercise,
+                      sets: func(exercise)
+                    }
+                  : // Otherwise, return an unmodifed exercise object
+                    exercise;
+              })
+            }
+          : // Otherwise, return an unmodifed workout object
+            workout
+      )
+    };
+  };
   switch (action.type) {
-    case "ADD_WORKOUT":
+    case "ADD_WORKOUT": {
       const newWorkout = {
         id: uuid(),
         name: "New Workout",
@@ -44,7 +44,8 @@ const reducer = (state, action) => {
         ...state,
         workouts: [...state.workouts, newWorkout]
       };
-    case "SELECT_WORKOUT":
+    }
+    case "SELECT_WORKOUT": {
       return {
         ...state, // Get State
         selectedWorkout: state.workouts.find(
@@ -52,14 +53,16 @@ const reducer = (state, action) => {
           workout => workout.id == action.payload.id
         )
       };
+    }
 
-    case "DESELECT_WORKOUT":
+    case "DESELECT_WORKOUT": {
       return {
         ...state,
         selectedWorkout: { id: null }
       };
+    }
 
-    case "ADD_EXERCISE":
+    case "ADD_EXERCISE": {
       const newExercise = {
         id: uuid(),
         name: "New Exercise",
@@ -74,17 +77,18 @@ const reducer = (state, action) => {
           workout.id === action.payload.id
             ? // If it does, return an object that:
               /* 
-          1. Gets the matched workout object with "...workout",
-          2. Assigns exercises array in the work out object to:
-          3. An Array that gets the exercise array and then concatonates the new exercise object
-          */
+        1. Gets the matched workout object with "...workout",
+        2. Assigns exercises array in the work out object to:
+        3. An Array that gets the exercise array and then concatonates the new exercise object
+        */
               { ...workout, exercises: [...workout.exercises, newExercise] }
             : // Otherwise, assign the workout object to its previous state
               workout
         )
       };
+    }
 
-    case "DELETE_EXERCISE":
+    case "DELETE_EXERCISE": {
       return {
         ...state, // Get state
         workouts: state.workouts.map((
@@ -103,100 +107,44 @@ const reducer = (state, action) => {
               workout
         )
       };
+    }
 
-    case "ADD_SET":
-      const newSet = exercise => [...exercise.sets, 5];
-      return updateSet(newSet, state, action);
-    // const Nreps = 5;
-    // return {
-    //   ...state, // Get state
-    //   workouts: state.workouts.map((
-    //     workout // Map Each workout in workouts array if:
-    //   ) =>
-    //     // The exercises within the workout contiain an exercise which matches target ID
-    //     workout.exercises.some(exercise => exercise.id === action.payload.id)
-    //       ? {
-    //           // Then,
-    //           ...workout, //get that workout
-    //           exercises: workout.exercises.map(exercise => {
-    //             // map each exercise within that workout if:
-    //             // the exercise matches the payload
-    //             return exercise.id === action.payload.id
-    //               ? {
-    //                   ...exercise,
-    //                   sets: [...exercise.sets, Nreps]
-    //                 }
-    //               : // Otherwise, return an unmodifed exercise object
-    //                 exercise;
-    //           })
-    //         }
-    //       : // Otherwise, return an unmodifed workout object
-    //         workout
-    //   )
-    // };
+    case "ADD_SET": {
+      const append = exercise => [...exercise.sets, 5];
+      return findSet(append);
+    }
 
-    case "DELETE_SET":
-      const { set, id } = action.payload;
-      const index = set - 1;
+    case "DELETE_SET": {
+      const index = action.payload.set - 1;
+      const remove = exercise => [
+        ...exercise.sets.slice(0, index),
+        ...exercise.sets.slice(index + 1)
+      ];
 
-      return {
-        ...state, // Get state
-        workouts: state.workouts.map((
-          workout // Map Each workout in workouts array if:
-        ) =>
-          // The exercises within the workout contiain an exercise which matches target ID
-          workout.exercises.some(exercise => exercise.id === id)
-            ? {
-                // Then,
-                ...workout, //get that workout
-                exercises: workout.exercises.map(exercise => {
-                  // map each exercise within that workout if:
-                  // the exercise matches the payload
-                  return exercise.id === id
-                    ? {
-                        ...exercise,
-                        sets: [
-                          ...exercise.sets.slice(0, index),
-                          ...exercise.sets.slice(index + 1)
-                        ]
-                      }
-                    : // Otherwise, return an unmodifed exercise object
-                      exercise;
-                })
-              }
-            : // Otherwise, return an unmodifed workout object
-              workout
-        )
+      return findSet(remove);
+    }
+
+    case "INCREMENT_REP": {
+      const index = action.payload.set - 1;
+      const increment = exercise => {
+        let reps = exercise.sets.slice();
+        reps[index] = parseInt(reps) + 1;
+        return [...reps];
       };
-    // return {
-    //   ...state, // Get state
-    //   workouts: state.workouts.map((
-    //     workout // Map Each workout in workouts array if:
-    //   ) =>
-    //     // The exercises within the workout contiain an exercise which matches target ID
-    //     workout.exercises.some(exercise => exercise.id === id)
-    //       ? {
-    //           // Then,
-    //           ...workout, //get that workout
-    //           exercises: workout.exercises.map(exercise => {
-    //             // map each exercise within that workout if:
-    //             // the exercise matches the payload
-    //             return exercise.id === id
-    //               ? {
-    //                   ...exercise,
-    //                   sets: [
-    //                     ...exercise.sets.slice(0, index),
-    //                     exercise.sets.slice(index)
-    //                   ]
-    //                 }
-    //               : // Otherwise, return an unmodifed exercise object
-    //                 exercise;
-    //           })
-    //         }
-    //       : // Otherwise, return an unmodifed workout object
-    //         workout
-    //   )
-    // };
+
+      return findSet(increment);
+    }
+    case "DECREMENT_REP": {
+      const index = action.payload.set - 1;
+      const increment = exercise => {
+        let reps = exercise.sets.slice();
+        reps[index] = parseInt(reps) - 1;
+        return [...reps];
+      };
+
+      return findSet(increment);
+    }
+
     default:
       return state;
   }

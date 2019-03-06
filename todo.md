@@ -14,8 +14,9 @@
 ~~3. Add Sets~~
 ~~4. Remove Sets~~
 
-5. Increment Reps
-6. Decrement Reps
+~~5. Increment Reps~~
+~~6. Decrement Reps~~
+
 7. Add Tags
 8. Create New Tags
 9. Remove Tags

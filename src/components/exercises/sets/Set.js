@@ -18,12 +18,12 @@ class Set extends Component {
               <td>
                 <i
                   className={`${styles.subtract} fas fa-minus`}
-                  // onClick={() =>
-                  //   dispatch({
-                  //     type: "DECREMENT_REP",
-                  //     payload: { set, id: id }
-                  //   })
-                  // }
+                  onClick={() =>
+                    dispatch({
+                      type: "DECREMENT_REP",
+                      payload: { set, id }
+                    })
+                  }
                 />
               </td>
               <td> {reps}</td>
