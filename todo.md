@@ -10,10 +10,10 @@
 ### Exercises
 
 ~~1. Change Exercise name~~
+~~2. Delete Exercise~~
+~~3. Add Sets~~
+~~4. Remove Sets~~
 
-2. Delete Exercise
-3. Add Sets
-4. Remove Sets
 5. Increment Reps
 6. Decrement Reps
 7. Add Tags

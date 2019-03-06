@@ -2,34 +2,57 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import styles from "./set.module.css";
+import { Consumer } from "../../../context";
 
 class Set extends Component {
-  state = {};
   render() {
-    const { set, reps } = this.props; // later to be pulled from state
+    const { set, reps, id } = this.props; // later to be pulled from state
+
     return (
-      <tr>
-        <td>{set} </td>
-        <td>
-          <i
-            className={`${styles.subtract} fas fa-minus`}
-            onClick={() => console.log("remove rep")}
-          />
-        </td>
-        <td> {reps}</td>
-        <td>
-          <i
-            className={`${styles.add} fas fa-plus`}
-            onClick={() => console.log("add rep")}
-          />
-        </td>
-        <td>
-          <i
-            className={`${styles.delete} fas fa-minus`}
-            onClick={() => console.log("remove Set")}
-          />
-        </td>
-      </tr>
+      <Consumer>
+        {value => {
+          const { dispatch } = value;
+          return (
+            <tr>
+              <td>{set} </td>
+              <td>
+                <i
+                  className={`${styles.subtract} fas fa-minus`}
+                  // onClick={() =>
+                  //   dispatch({
+                  //     type: "DECREMENT_REP",
+                  //     payload: { set, id: id }
+                  //   })
+                  // }
+                />
+              </td>
+              <td> {reps}</td>
+              <td>
+                <i
+                  className={`${styles.add} fas fa-plus`}
+                  onClick={() =>
+                    dispatch({
+                      type: "INCREMENT_REP",
+                      payload: { set, id }
+                    })
+                  }
+                />
+              </td>
+              <td>
+                <i
+                  className={`${styles.delete} fas fa-minus`}
+                  onClick={() =>
+                    dispatch({
+                      type: "DELETE_SET",
+                      payload: { set, id }
+                    })
+                  }
+                />
+              </td>
+            </tr>
+          );
+        }}
+      </Consumer>
     );
   }
 }

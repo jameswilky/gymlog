@@ -3,6 +3,35 @@ import uuid from "uuid";
 
 const Context = React.createContext();
 
+const updateSet = (newSet, state, action) => {
+  return {
+    ...state, // Get state
+    workouts: state.workouts.map((
+      workout // Map Each workout in workouts array if:
+    ) =>
+      // The exercises within the workout contiain an exercise which matches target ID
+      workout.exercises.some(exercise => exercise.id === action.payload.id)
+        ? {
+            // Then,
+            ...workout, //get that workout
+            exercises: workout.exercises.map(exercise => {
+              // map each exercise within that workout if:
+              // the exercise matches the payload
+              return exercise.id === action.payload.id
+                ? {
+                    ...exercise,
+                    sets: newSet(exercise)
+                  }
+                : // Otherwise, return an unmodifed exercise object
+                  exercise;
+            })
+          }
+        : // Otherwise, return an unmodifed workout object
+          workout
+    )
+  };
+};
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_WORKOUT":
@@ -37,7 +66,6 @@ const reducer = (state, action) => {
         tags: [],
         sets: []
       };
-
       return {
         ...state, //Get State
         // Assign workouts array with in state
@@ -55,6 +83,120 @@ const reducer = (state, action) => {
               workout
         )
       };
+
+    case "DELETE_EXERCISE":
+      return {
+        ...state, // Get state
+        workouts: state.workouts.map((
+          workout // Map Each workout in workouts array if:
+        ) =>
+          // The exercises within the workout contiain an exercise which matches target ID
+          workout.exercises.some(exercise => exercise.id === action.payload.id)
+            ? {
+                // Then, Return each item in that workout which does NOT equal that ID
+                ...workout,
+                exercises: workout.exercises.filter(
+                  exercise => exercise.id !== action.payload.id
+                )
+              }
+            : // Otherwise, return an unmodifed workout object
+              workout
+        )
+      };
+
+    case "ADD_SET":
+      const newSet = exercise => [...exercise.sets, 5];
+      return updateSet(newSet, state, action);
+    // const Nreps = 5;
+    // return {
+    //   ...state, // Get state
+    //   workouts: state.workouts.map((
+    //     workout // Map Each workout in workouts array if:
+    //   ) =>
+    //     // The exercises within the workout contiain an exercise which matches target ID
+    //     workout.exercises.some(exercise => exercise.id === action.payload.id)
+    //       ? {
+    //           // Then,
+    //           ...workout, //get that workout
+    //           exercises: workout.exercises.map(exercise => {
+    //             // map each exercise within that workout if:
+    //             // the exercise matches the payload
+    //             return exercise.id === action.payload.id
+    //               ? {
+    //                   ...exercise,
+    //                   sets: [...exercise.sets, Nreps]
+    //                 }
+    //               : // Otherwise, return an unmodifed exercise object
+    //                 exercise;
+    //           })
+    //         }
+    //       : // Otherwise, return an unmodifed workout object
+    //         workout
+    //   )
+    // };
+
+    case "DELETE_SET":
+      const { set, id } = action.payload;
+      const index = set - 1;
+
+      return {
+        ...state, // Get state
+        workouts: state.workouts.map((
+          workout // Map Each workout in workouts array if:
+        ) =>
+          // The exercises within the workout contiain an exercise which matches target ID
+          workout.exercises.some(exercise => exercise.id === id)
+            ? {
+                // Then,
+                ...workout, //get that workout
+                exercises: workout.exercises.map(exercise => {
+                  // map each exercise within that workout if:
+                  // the exercise matches the payload
+                  return exercise.id === id
+                    ? {
+                        ...exercise,
+                        sets: [
+                          ...exercise.sets.slice(0, index),
+                          ...exercise.sets.slice(index + 1)
+                        ]
+                      }
+                    : // Otherwise, return an unmodifed exercise object
+                      exercise;
+                })
+              }
+            : // Otherwise, return an unmodifed workout object
+              workout
+        )
+      };
+    // return {
+    //   ...state, // Get state
+    //   workouts: state.workouts.map((
+    //     workout // Map Each workout in workouts array if:
+    //   ) =>
+    //     // The exercises within the workout contiain an exercise which matches target ID
+    //     workout.exercises.some(exercise => exercise.id === id)
+    //       ? {
+    //           // Then,
+    //           ...workout, //get that workout
+    //           exercises: workout.exercises.map(exercise => {
+    //             // map each exercise within that workout if:
+    //             // the exercise matches the payload
+    //             return exercise.id === id
+    //               ? {
+    //                   ...exercise,
+    //                   sets: [
+    //                     ...exercise.sets.slice(0, index),
+    //                     exercise.sets.slice(index)
+    //                   ]
+    //                 }
+    //               : // Otherwise, return an unmodifed exercise object
+    //                 exercise;
+    //           })
+    //         }
+    //       : // Otherwise, return an unmodifed workout object
+    //         workout
+    //   )
+    // };
     default:
       return state;
   }
