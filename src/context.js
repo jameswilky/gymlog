@@ -99,6 +99,12 @@ const reducer = (state, action) => {
         )
       };
     }
+    case "UPDATE_EXERCISE_NAME": {
+      const update = () => {
+        return action.payload.name;
+      };
+      return updateExercise(update, "name");
+    }
     case "DELETE_EXERCISE": {
       return {
         ...state, // Get state

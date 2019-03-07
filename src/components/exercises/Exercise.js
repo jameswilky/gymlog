@@ -46,6 +46,10 @@ class Exercise extends Component {
                     onKeyPress={e => {
                       // Blur on Enter
                       if (e.key === "Enter") {
+                        dispatch({
+                          type: "UPDATE_EXERCISE_NAME",
+                          payload: { name, id }
+                        });
                         e.target.blur();
                       }
                     }}

@@ -24,7 +24,7 @@
 10. Synchronize name updates with global state
 
 - ~~Workout Names~~
-- Exercise Names
+- ~~Exercise Names~~
 - Tag Names
 
 11. Create Modal to input new Tag names and Exercise Names
