@@ -4,7 +4,7 @@ import uuid from "uuid";
 const Context = React.createContext();
 
 const reducer = (state, action) => {
-  const findSet = func => {
+  const updateExercise = (func, target) => {
     // Helper function to find set nested in state
     return {
       ...state, // Get state
@@ -22,7 +22,7 @@ const reducer = (state, action) => {
                 return exercise.id === action.payload.id
                   ? {
                       ...exercise,
-                      sets: func(exercise)
+                      [target]: func(exercise)
                     }
                   : // Otherwise, return an unmodifed exercise object
                     exercise;
@@ -33,6 +33,7 @@ const reducer = (state, action) => {
       )
     };
   };
+
   switch (action.type) {
     case "ADD_WORKOUT": {
       const newWorkout = {
@@ -43,6 +44,17 @@ const reducer = (state, action) => {
       return {
         ...state,
         workouts: [...state.workouts, newWorkout]
+      };
+    }
+
+    case "UPDATE_WORKOUT_NAME": {
+      return {
+        ...state,
+        workouts: state.workouts.map(workout => {
+          return workout.id === action.payload.id
+            ? { ...workout, name: action.payload.name }
+            : workout;
+        })
       };
     }
     case "SELECT_WORKOUT": {
@@ -87,7 +99,6 @@ const reducer = (state, action) => {
         )
       };
     }
-
     case "DELETE_EXERCISE": {
       return {
         ...state, // Get state
@@ -111,7 +122,7 @@ const reducer = (state, action) => {
 
     case "ADD_SET": {
       const append = exercise => [...exercise.sets, 5];
-      return findSet(append);
+      return updateExercise(append, "sets");
     }
 
     case "DELETE_SET": {
@@ -121,28 +132,28 @@ const reducer = (state, action) => {
         ...exercise.sets.slice(index + 1)
       ];
 
-      return findSet(remove);
+      return updateExercise(remove, "sets");
     }
 
     case "INCREMENT_REP": {
       const index = action.payload.set - 1;
       const increment = exercise => {
         let reps = exercise.sets.slice();
-        reps[index] = parseInt(reps) + 1;
+        reps[index] = parseInt(reps[index]) + 1;
         return [...reps];
       };
 
-      return findSet(increment);
+      return updateExercise(increment, "sets");
     }
     case "DECREMENT_REP": {
       const index = action.payload.set - 1;
       const increment = exercise => {
         let reps = exercise.sets.slice();
-        reps[index] = parseInt(reps) - 1;
+        reps[index] = parseInt(reps[index]) - 1;
         return [...reps];
       };
 
-      return findSet(increment);
+      return updateExercise(increment, "sets");
     }
 
     default:

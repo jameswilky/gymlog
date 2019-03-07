@@ -21,6 +21,14 @@
 8. Create New Tags
 9. Remove Tags
 
+10. Synchronize name updates with global state
+
+- ~~Workout Names~~
+- Exercise Names
+- Tag Names
+
+11. Create Modal to input new Tag names and Exercise Names
+
 ### Active Workout
 
 1. Start a workout

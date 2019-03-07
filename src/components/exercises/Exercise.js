@@ -110,6 +110,18 @@ class Exercise extends Component {
                   <div className={styles.tagContainer}>
                     {tags.map(tag => (
                       <div className={styles.tag} key={uuid()}>
+                        {/* <input
+                          type="text"
+                          name={"tag"}
+                          onChange={this.onChange}
+                          value={tag}
+                          // onKeyPress={e => {
+                          //   // Blur on Enter
+                          //   if (e.key === "Enter") {
+                          //     e.target.blur();
+                          //   }
+                          // }}
+                        /> */}
                         {tag}
                       </div>
                     ))}

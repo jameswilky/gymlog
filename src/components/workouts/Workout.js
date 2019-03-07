@@ -66,6 +66,10 @@ class Workout extends Component {
                       // Blur on Enter
                       if (e.key === "Enter") {
                         e.target.blur();
+                        dispatch({
+                          type: "UPDATE_WORKOUT_NAME",
+                          payload: { name, id }
+                        });
                       }
                     }}
                   />
