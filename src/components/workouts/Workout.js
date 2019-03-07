@@ -19,10 +19,6 @@ class Workout extends Component {
     });
   }
 
-  onDeleteExerciseClick = id => {
-    this.props.deleteExerciseHandler(id);
-  };
-
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };

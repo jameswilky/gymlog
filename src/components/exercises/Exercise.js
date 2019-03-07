@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Set from "./sets/Set";
-
+import Set from "../sets/Set";
 import { Consumer } from "../../context";
 import styles from "./exercise.module.css";
 import uuid from "uuid";
@@ -24,7 +23,7 @@ class Exercise extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   render() {
-    const { showExercise, name } = this.state;
+    const { showExercise, name, showModal } = this.state;
     const { tags, sets, id } = this.props.exercise;
     return (
       <Consumer>
@@ -133,6 +132,7 @@ class Exercise extends Component {
                     <div className={styles.createTagBtn}>
                       <i className="fas fa-plus" />
                       New Tag
+                      <button type="button" onClick={() => {}} />
                     </div>
                   </div>
                   <div className={styles.footer}>

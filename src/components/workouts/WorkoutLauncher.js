@@ -3,17 +3,9 @@ import React, { Component } from "react";
 import Workout from "../workouts/Workout";
 import uuid from "uuid";
 import { Consumer } from "../../context";
+import { Link } from "react-router-dom";
 
 class WorkoutLauncher extends Component {
-  deleteExercise = id => {};
-
-  // deleteWorkout = id => {
-  //   this.setState({
-  //     ...this.state,
-  //     workouts: this.state.workouts.filter(workout => workout.id != id)
-  //   });
-  // };
-
   clearSelections = (e, dispatch) => {
     /* Temporary */
     const clickedContainer = e.target.classList.contains("container");
@@ -58,12 +50,20 @@ class WorkoutLauncher extends Component {
               </div>
 
               {selectedWorkout.id ? (
-                <div className="main__button start">
-                  <i className="fas fa-play" />
+                <div className="main__button green">
+                  <Link
+                    to={{
+                      pathname: "/active",
+                      state: { workout: selectedWorkout }
+                    }}
+                  >
+                    {" "}
+                    <i className="fas fa-play" />
+                  </Link>
                 </div>
               ) : (
                 <div
-                  className="main__button add"
+                  className="main__button red"
                   onClick={() =>
                     dispatch({ type: "ADD_WORKOUT", payload: null })
                   }

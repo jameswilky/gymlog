@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import styles from "./set.module.css";
-import { Consumer } from "../../../context";
+import { Consumer } from "../../context";
 
 class Set extends Component {
   render() {

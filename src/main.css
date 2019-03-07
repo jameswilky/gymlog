@@ -103,11 +103,15 @@ content = grid itself
   box-shadow: var(--shadow);
 }
 
-.start {
+.green {
   background-color: var(--secondary);
 }
 
-.add {
+.start i {
+  color: white;
+}
+
+.red {
   background-color: var(--danger);
 }
 
