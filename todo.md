@@ -31,12 +31,19 @@
 
 ### Active Workout
 
-1. Start a workout
+~~1. Start a workout~~
+
 2. End a Workout
-3. Save workout
+3. Save/Submit workout
 4. Go Back to Workout Loader
 5. Go Back to Current workout
 6. # Error handling and warnings
+   ~~7. Load selected Workout into Active workout~~
+   ~~8. Add new exercises to active workout~~
+7. Delete exercises from active workout
+8. Update exercises from active workout
+9. Increment/decrement Reps
+10. Add Sets/Remove Sets
 
 ## Stats
 

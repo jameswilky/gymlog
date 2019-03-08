@@ -166,7 +166,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
-export default class Provider extends Component {
+class Provider extends Component {
   state = {
     selectedWorkout: {
       id: null
@@ -211,5 +211,6 @@ export default class Provider extends Component {
     );
   }
 }
+export const LoaderProvider = Provider;
 
-export const Consumer = Context.Consumer;
+export const LoaderConsumer = Context.Consumer;

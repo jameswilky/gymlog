@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Exercise from "../exercises/Exercise";
 import styles from "./workout.module.css";
-import { Consumer } from "../../context";
+import { LoaderConsumer } from "../../LoaderContext";
 
 class Workout extends Component {
   state = {
@@ -12,7 +12,6 @@ class Workout extends Component {
 
   componentDidMount() {
     /* On Load pass workout name into local state */
-    console.log(this.props);
     const { name } = this.props.workout;
     this.setState({
       name
@@ -28,7 +27,7 @@ class Workout extends Component {
     const { id, exercises } = this.props.workout;
     const { selected } = this.props;
     return (
-      <Consumer>
+      <LoaderConsumer>
         {value => {
           const { dispatch } = value;
           return (
@@ -102,7 +101,7 @@ class Workout extends Component {
             </div>
           );
         }}
-      </Consumer>
+      </LoaderConsumer>
     );
   }
 }

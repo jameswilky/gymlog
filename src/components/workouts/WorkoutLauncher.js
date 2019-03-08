@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Workout from "../workouts/Workout";
 import uuid from "uuid";
-import { Consumer } from "../../context";
+import { LoaderConsumer } from "../../LoaderContext";
 import { Link } from "react-router-dom";
 
 class WorkoutLauncher extends Component {
@@ -21,7 +21,7 @@ class WorkoutLauncher extends Component {
 
   render() {
     return (
-      <Consumer>
+      <LoaderConsumer>
         {value => {
           const { dispatch, workouts, selectedWorkout } = value;
           return (
@@ -54,7 +54,9 @@ class WorkoutLauncher extends Component {
                   <Link
                     to={{
                       pathname: "/active",
-                      state: { workout: selectedWorkout }
+                      state: {
+                        workout: selectedWorkout
+                      }
                     }}
                   >
                     {" "}
@@ -74,7 +76,7 @@ class WorkoutLauncher extends Component {
             </div>
           );
         }}
-      </Consumer>
+      </LoaderConsumer>
     );
   }
 }

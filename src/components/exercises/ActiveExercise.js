@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Set from "../sets/Set";
-import { LoaderConsumer } from "../../LoaderContext";
+import { ActiveConsumer } from "../../ActiveContext";
 import styles from "./exercise.module.css";
 import uuid from "uuid";
 
-class Exercise extends Component {
+class ActiveExercise extends Component {
   state = {
     showExercise: false,
     name: ""
@@ -26,7 +26,7 @@ class Exercise extends Component {
     const { showExercise, name } = this.state;
     const { tags, sets, id } = this.props.exercise;
     return (
-      <LoaderConsumer>
+      <ActiveConsumer>
         {value => {
           const { dispatch } = value;
           return (
@@ -150,9 +150,9 @@ class Exercise extends Component {
             </div>
           );
         }}
-      </LoaderConsumer>
+      </ActiveConsumer>
     );
   }
 }
 
-export default Exercise;
+export default ActiveExercise;

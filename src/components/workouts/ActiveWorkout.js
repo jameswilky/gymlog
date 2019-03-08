@@ -1,29 +1,30 @@
 import React, { Component } from "react";
-import { Consumer } from "../../context";
-import Exercise from "../exercises/Exercise";
+import { ActiveConsumer } from "../../ActiveContext";
+import ActiveExercise from "../exercises/ActiveExercise";
+import uuid from "uuid";
 
 class ActiveWorkout extends Component {
-  state = {
-    timer: null
-  };
-
   render() {
-    const { exercises, id, name } = this.props.location.state.workout;
-
     return (
-      <Consumer>
+      <ActiveConsumer>
         {value => {
-          const { dispatch } = value;
+          const { exercises, name } = value;
           return (
             <div className="content">
               <div className="container">
+                <div>{/* <h1>{name}</h1> */}</div>
                 <div className="card__body" style={{ paddingRight: "0px" }}>
                   {exercises.map(exercise => (
-                    <Exercise key={exercise.id} exercise={exercise} />
+                    <ActiveExercise key={exercise.id} exercise={exercise} />
                   ))}
                 </div>
                 <div className="card__footer">
-                  <button className="card__add">
+                  <button
+                    className="card__add"
+                    // onClick={() => {
+                    //   dispatch({ type: "ADD_EXERCISE", payload: null });
+                    // }}
+                  >
                     <i className="fas fa-plus"> </i>
                     Add Exercise
                   </button>
@@ -36,7 +37,7 @@ class ActiveWorkout extends Component {
             </div>
           );
         }}
-      </Consumer>
+      </ActiveConsumer>
     );
   }
 }
