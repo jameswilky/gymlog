@@ -161,16 +161,52 @@ const reducer = (state, action) => {
 
       return updateExercise(increment, "sets");
     }
-
+    /* Active Workout Reducers
+    These cases handle functions related to manipulating the active workout instance
+    */
+    case "LOAD_WORKOUT": {
+      let x = {
+        ...state,
+        activeWorkout: { ...state.selectedWorkout, id: uuid() }
+      };
+      console.log(x);
+      return {
+        ...state,
+        activeWorkout: state.selectedWorkout,
+        id: action.payload.id
+      };
+    }
+    case "ADD_EXERCISE_TO_INSTANCE": {
+      const newExercise = {
+        id: uuid(),
+        name: "New Exercise",
+        tags: [],
+        sets: []
+      };
+      return {
+        activeWorkout: {
+          ...state.activeWorkout, //get that workout
+          exercises: [...state.activeWorkout.exercises, newExercise]
+        }
+      };
+    }
+    case "SAVE_WORKOUT": {
+      console.log("Loaded");
+      return {
+        ...state,
+        history: [...state.history, state.activeWorkout]
+      };
+    }
     default:
       return state;
   }
 };
-class Provider extends Component {
+export default class Provider extends Component {
   state = {
     selectedWorkout: {
       id: null
     },
+    activeWorkout: {},
     workouts: [
       {
         id: 1,
@@ -199,6 +235,7 @@ class Provider extends Component {
         ]
       }
     ],
+    history: [],
     dispatch: action => {
       this.setState(state => reducer(state, action));
     }
@@ -211,6 +248,5 @@ class Provider extends Component {
     );
   }
 }
-export const LoaderProvider = Provider;
 
-export const LoaderConsumer = Context.Consumer;
+export const Consumer = Context.Consumer;

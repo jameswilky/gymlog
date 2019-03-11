@@ -2,10 +2,11 @@ import React, { Component } from "react";
 
 import Workout from "../workouts/Workout";
 import uuid from "uuid";
-import { LoaderConsumer } from "../../LoaderContext";
+import { Consumer } from "../../Context";
 import { Link } from "react-router-dom";
 
 class WorkoutLauncher extends Component {
+  state = { nextID: uuid() };
   clearSelections = (e, dispatch) => {
     /* Temporary */
     const clickedContainer = e.target.classList.contains("container");
@@ -21,9 +22,9 @@ class WorkoutLauncher extends Component {
 
   render() {
     return (
-      <LoaderConsumer>
+      <Consumer>
         {value => {
-          const { dispatch, workouts, selectedWorkout } = value;
+          const { dispatch, workouts, selectedWorkout, activeWorkout } = value;
           return (
             <div
               className="content"
@@ -50,13 +51,18 @@ class WorkoutLauncher extends Component {
               </div>
 
               {selectedWorkout.id ? (
-                <div className="main__button green">
+                <div
+                  className="main__button green"
+                  onClick={() =>
+                    dispatch({
+                      type: "LOAD_WORKOUT",
+                      payload: this.state.nextID
+                    })
+                  }
+                >
                   <Link
                     to={{
-                      pathname: "/active",
-                      state: {
-                        workout: selectedWorkout
-                      }
+                      pathname: `/active/${this.state.nextID}`
                     }}
                   >
                     {" "}
@@ -76,7 +82,7 @@ class WorkoutLauncher extends Component {
             </div>
           );
         }}
-      </LoaderConsumer>
+      </Consumer>
     );
   }
 }

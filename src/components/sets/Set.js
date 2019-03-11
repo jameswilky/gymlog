@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import styles from "./set.module.css";
-import { LoaderConsumer } from "../../LoaderContext";
+import { Consumer } from "../../Context";
 
 class Set extends Component {
   render() {
     const { set, reps, id } = this.props; // later to be pulled from state
 
     return (
-      <LoaderConsumer>
+      <Consumer>
         {value => {
           const { dispatch } = value;
           return (
@@ -52,7 +52,7 @@ class Set extends Component {
             </tr>
           );
         }}
-      </LoaderConsumer>
+      </Consumer>
     );
   }
 }

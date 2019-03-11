@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Set from "../sets/Set";
-import { ActiveConsumer } from "../../ActiveContext";
+import { Consumer } from "../../Context";
 import styles from "./exercise.module.css";
 import uuid from "uuid";
 
@@ -26,7 +26,7 @@ class ActiveExercise extends Component {
     const { showExercise, name } = this.state;
     const { tags, sets, id } = this.props.exercise;
     return (
-      <ActiveConsumer>
+      <Consumer>
         {value => {
           const { dispatch } = value;
           return (
@@ -150,7 +150,7 @@ class ActiveExercise extends Component {
             </div>
           );
         }}
-      </ActiveConsumer>
+      </Consumer>
     );
   }
 }
