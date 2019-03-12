@@ -5,22 +5,24 @@ import styles from "./exercise.module.css";
 import uuid from "uuid";
 import ExerciseHeader from "./ExerciseHeader";
 import ExerciseBody from "./ExerciseBody";
-import ExerciseBodyActive from "./ExerciseBodyActive";
 
 import ExerciseFooter from "./ExerciseFooter";
 
 class Exercise extends Component {
   state = {
     showExercise: false,
-    name: ""
+    name: "",
+    isActive: false
   };
 
   componentDidMount() {
     /* On Load pass workout name into local state */
     console.log(this.props);
     const { name } = this.props.exercise;
+    const { isActive } = this.props;
     this.setState({
-      name
+      name,
+      isActive
     });
   }
 
@@ -33,7 +35,7 @@ class Exercise extends Component {
   };
 
   render() {
-    const { showExercise, name } = this.state;
+    const { showExercise, name, isActive } = this.state;
     const { tags, sets, id } = this.props.exercise;
     return (
       <Consumer>
@@ -60,11 +62,12 @@ class Exercise extends Component {
                   {/* @todo  
                   create switch between active and non active
                   */}
-                  <ExerciseBodyActive
+                  <ExerciseBody
                     id={id}
                     dispatch={dispatch}
                     sets={sets}
                     tags={tags}
+                    isActive={isActive}
                   />
                   <ExerciseFooter id={id} dispatch={dispatch} />
                 </div>

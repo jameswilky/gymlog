@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Consumer } from "../../Context";
-import ActiveExercise from "../exercises/ActiveExercise";
+import Exercise from "../exercises/Exercise";
 import uuid from "uuid";
 import { Link } from "react-router-dom";
 
@@ -17,7 +17,11 @@ class ActiveWorkout extends Component {
                 <div>{/* <h1>{name}</h1> */}</div>
                 <div className="card__body" style={{ paddingRight: "0px" }}>
                   {exercises.map(exercise => (
-                    <ActiveExercise key={exercise.id} exercise={exercise} />
+                    <Exercise
+                      key={exercise.id}
+                      exercise={exercise}
+                      isActive={true}
+                    />
                   ))}
                 </div>
                 <div className="card__footer">

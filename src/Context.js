@@ -4,6 +4,24 @@ import uuid from "uuid";
 const Context = React.createContext();
 
 const reducer = (state, action) => {
+  const updateActiveExercise = (func, target) => {
+    return {
+      activeWorkout: {
+        ...state.activeWorkout,
+        exercises: state.activeWorkout.exercises.map(exercise => {
+          // map each exercise within that workout if:
+          // the exercise matches the payload
+          return exercise.id === action.payload.id
+            ? {
+                ...exercise,
+                [target]: func(exercise)
+              }
+            : // Otherwise, return an unmodifed exercise object
+              exercise;
+        })
+      }
+    };
+  };
   const updateExercise = (func, target) => {
     // Helper function to find set nested in state
     return {
@@ -46,7 +64,6 @@ const reducer = (state, action) => {
         workouts: [...state.workouts, newWorkout]
       };
     }
-
     case "UPDATE_WORKOUT_NAME": {
       return {
         ...state,
@@ -66,14 +83,12 @@ const reducer = (state, action) => {
         )
       };
     }
-
     case "DESELECT_WORKOUT": {
       return {
         ...state,
         selectedWorkout: { id: null }
       };
     }
-
     case "ADD_EXERCISE": {
       const newExercise = {
         id: uuid(),
@@ -125,12 +140,10 @@ const reducer = (state, action) => {
         )
       };
     }
-
     case "ADD_SET": {
       const append = exercise => [...exercise.sets, 5];
       return updateExercise(append, "sets");
     }
-
     case "DELETE_SET": {
       const index = action.payload.set - 1;
       const remove = exercise => [
@@ -140,7 +153,6 @@ const reducer = (state, action) => {
 
       return updateExercise(remove, "sets");
     }
-
     case "INCREMENT_REP": {
       const index = action.payload.set - 1;
       const increment = exercise => {
@@ -149,21 +161,33 @@ const reducer = (state, action) => {
         return [...reps];
       };
 
-      return updateExercise(increment, "sets");
+      switch (action.payload.isActive) {
+        case true: {
+          return updateActiveExercise(increment, "sets");
+        }
+        default: {
+          return updateExercise(increment, "sets");
+        }
+      }
     }
     case "DECREMENT_REP": {
       const index = action.payload.set - 1;
-      const increment = exercise => {
+      const decrement = exercise => {
         let reps = exercise.sets.slice();
         reps[index] = parseInt(reps[index]) - 1;
         return [...reps];
       };
 
-      return updateExercise(increment, "sets");
+      switch (action.payload.isActive) {
+        case true: {
+          return updateActiveExercise(decrement, "sets");
+        }
+        default: {
+          return updateExercise(decrement, "sets");
+        }
+      }
     }
-    /* Active Workout Reducers
-    These cases handle functions related to manipulating the active workout instance
-    */
+
     case "LOAD_WORKOUT": {
       let x = {
         ...state,

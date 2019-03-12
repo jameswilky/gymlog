@@ -4,50 +4,40 @@ import uuid from "uuid";
 import Set from "../sets/Set";
 
 export default function ExerciseBody(props) {
-  const { sets, id, dispatch, tags } = props;
+  const { sets, id, dispatch, tags, isActive } = props;
   return (
     <div className={styles.body}>
-      <hr />
-      <table>
-        <thead>
-          <tr>
-            <th>Set</th>
-            <th />
-            <th>Reps</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          {sets.map((reps, set) => (
-            <Set reps={reps} set={set + 1} key={uuid()} id={id} />
-          ))}
-        </tbody>
-      </table>
-      <button className={styles.add}>
-        <i
-          className="fas fa-plus"
-          onClick={() => dispatch({ type: "ADD_SET", payload: { id } })}
-        >
-          {" "}
-        </i>
-      </button>
+      <div className={styles.bodyHeadings}>
+        <div>Sets</div>
+        <div>Reps</div>
+        {isActive ? <div>Weight</div> : null}
+        <div />
+      </div>
+      <div className={styles.bodyContent}>
+        {sets.map((reps, set) => (
+          <Set
+            reps={reps}
+            set={set + 1}
+            key={uuid()}
+            id={id}
+            isActive={isActive}
+          />
+        ))}
+      </div>
+      <div className={styles.bodyFooter}>
+        <button className={styles.add}>
+          <i
+            className="fas fa-plus"
+            onClick={() => dispatch({ type: "ADD_SET", payload: { id } })}
+          >
+            {" "}
+          </i>
+        </button>
+      </div>
 
-      <hr />
       <div className={styles.tagContainer}>
         {tags.map(tag => (
           <div className={styles.tag} key={uuid()}>
-            {/* <input
-                          type="text"
-                          name={"tag"}
-                          onChange={this.onChange}
-                          value={tag}
-                          // onKeyPress={e => {
-                          //   // Blur on Enter
-                          //   if (e.key === "Enter") {
-                          //     e.target.blur();
-                          //   }
-                          // }}
-                        /> */}
             {tag}
           </div>
         ))}

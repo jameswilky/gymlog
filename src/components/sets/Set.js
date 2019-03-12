@@ -6,7 +6,7 @@ import { Consumer } from "../../Context";
 
 class Set extends Component {
   render() {
-    const { set, reps, id } = this.props; // later to be pulled from state
+    const { set, reps, id, isActive } = this.props; // later to be pulled from state
 
     return (
       <Consumer>
@@ -24,7 +24,7 @@ class Set extends Component {
                     onClick={() =>
                       dispatch({
                         type: "DECREMENT_REP",
-                        payload: { set, id }
+                        payload: { set, id, isActive }
                       })
                     }
                   />
@@ -36,12 +36,17 @@ class Set extends Component {
                     onClick={() =>
                       dispatch({
                         type: "INCREMENT_REP",
-                        payload: { set, id }
+                        payload: { set, id, isActive }
                       })
                     }
                   />
                 </div>
               </div>
+              {isActive ? (
+                <div>
+                  <input type="number" />
+                </div>
+              ) : null}
               <div>
                 {" "}
                 <i
