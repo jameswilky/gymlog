@@ -13,32 +13,37 @@ class Set extends Component {
         {value => {
           const { dispatch } = value;
           return (
-            <tr>
-              <td>{set} </td>
-              <td>
-                <i
-                  className={`${styles.subtract} fas fa-minus`}
-                  onClick={() =>
-                    dispatch({
-                      type: "DECREMENT_REP",
-                      payload: { set, id }
-                    })
-                  }
-                />
-              </td>
-              <td> {reps}</td>
-              <td>
-                <i
-                  className={`${styles.add} fas fa-plus`}
-                  onClick={() =>
-                    dispatch({
-                      type: "INCREMENT_REP",
-                      payload: { set, id }
-                    })
-                  }
-                />
-              </td>
-              <td>
+            <div className={styles.set}>
+              <div>{set}</div>
+
+              <div className={styles.rep}>
+                <div>
+                  {" "}
+                  <i
+                    className={`${styles.adjust} fas fa-minus`}
+                    onClick={() =>
+                      dispatch({
+                        type: "DECREMENT_REP",
+                        payload: { set, id }
+                      })
+                    }
+                  />
+                </div>
+                <div>{reps}</div>
+                <div>
+                  <i
+                    className={`${styles.adjust} fas fa-plus`}
+                    onClick={() =>
+                      dispatch({
+                        type: "INCREMENT_REP",
+                        payload: { set, id }
+                      })
+                    }
+                  />
+                </div>
+              </div>
+              <div>
+                {" "}
                 <i
                   className={`${styles.delete} fas fa-minus`}
                   onClick={() =>
@@ -48,8 +53,8 @@ class Set extends Component {
                     })
                   }
                 />
-              </td>
-            </tr>
+              </div>
+            </div>
           );
         }}
       </Consumer>

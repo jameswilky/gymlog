@@ -4,6 +4,9 @@ import { Consumer } from "../../Context";
 import styles from "./exercise.module.css";
 import uuid from "uuid";
 import ExerciseHeader from "./ExerciseHeader";
+import ExerciseBody from "./ExerciseBody";
+import ExerciseBodyActive from "./ExerciseBodyActive";
+
 import ExerciseFooter from "./ExerciseFooter";
 
 class Exercise extends Component {
@@ -54,61 +57,15 @@ class Exercise extends Component {
 
               {showExercise ? (
                 <div>
-                  <div className={styles.body}>
-                    <hr />
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Set</th>
-                          <th />
-                          <th>Reps</th>
-                          <th />
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {sets.map((reps, set) => (
-                          <Set reps={reps} set={set + 1} key={uuid()} id={id} />
-                        ))}
-                      </tbody>
-                    </table>
-                    <button className={styles.add}>
-                      <i
-                        className="fas fa-plus"
-                        onClick={() =>
-                          dispatch({ type: "ADD_SET", payload: { id } })
-                        }
-                      >
-                        {" "}
-                      </i>
-                    </button>
-
-                    <hr />
-                    <div className={styles.tagContainer}>
-                      {tags.map(tag => (
-                        <div className={styles.tag} key={uuid()}>
-                          {/* <input
-                          type="text"
-                          name={"tag"}
-                          onChange={this.onChange}
-                          value={tag}
-                          // onKeyPress={e => {
-                          //   // Blur on Enter
-                          //   if (e.key === "Enter") {
-                          //     e.target.blur();
-                          //   }
-                          // }}
-                        /> */}
-                          {tag}
-                        </div>
-                      ))}
-
-                      <div className={styles.createTagBtn}>
-                        <i className="fas fa-plus" />
-                        New Tag
-                        <button type="button" onClick={() => {}} />
-                      </div>
-                    </div>
-                  </div>
+                  {/* @todo  
+                  create switch between active and non active
+                  */}
+                  <ExerciseBodyActive
+                    id={id}
+                    dispatch={dispatch}
+                    sets={sets}
+                    tags={tags}
+                  />
                   <ExerciseFooter id={id} dispatch={dispatch} />
                 </div>
               ) : null}

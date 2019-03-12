@@ -22,15 +22,6 @@ html {
   --shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* TIPS NOTES */
-/*
-Align = Y = Up/Down
-Justidy = X = Left/Right
-
-Items = items in grid
-content = grid itself
-*/
-
 .header,
 .footer,
 .content {
@@ -90,6 +81,12 @@ content = grid itself
   bottom: 150px;
   overflow: auto;
 }
+.contentHeading {
+  height: 50px;
+  text-align: center;
+  padding: 20px;
+  color: var(--secondary);
+}
 
 /* Main Button*/
 .main__button {
@@ -120,7 +117,9 @@ a {
 
 .container {
   text-align: center;
-  margin-top: 15px;
+  /* margin-top: 15px; */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 .container > h2 {
   color: var(--secondary);
@@ -131,7 +130,7 @@ a {
   padding: 10px 0px 10px 10px;
   border: 1px solid #cccccc;
   border-radius: 5px;
-  margin: 15px;
+  margin: 15px 15px 0 15px;
   background-color: #fff;
   box-shadow: var(--shadow);
 }

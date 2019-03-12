@@ -29,21 +29,25 @@
 
 11. Create Modal to input new Tag names and Exercise Names
 
+12. Update layout of exercises component
+13. Update layout of sets component
+
 ### Active Workout
 
 ~~1. Start a workout~~
 
-2. End a Workout
-3. Save/Submit workout
+~~2. End a Workout~~
+~~3. Save/Submit workout~~
+
 4. Go Back to Workout Loader
 5. Go Back to Current workout
 6. # Error handling and warnings
    ~~7. Load selected Workout into Active workout~~
    ~~8. Add new exercises to active workout~~
 7. Delete exercises from active workout
-8. Update exercises from active workout
-9. Increment/decrement Reps
-10. Add Sets/Remove Sets
+   ~~8. Update exercises name~~
+8. Increment/decrement Reps
+9. Add Sets/Remove Sets
 
 ## Stats
 

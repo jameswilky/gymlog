@@ -33,10 +33,6 @@
   padding-left: 5px;
 }
 
-.body hr {
-  margin: 15px;
-}
-
 .body .tagContainer {
   font-size: 0.8em;
   display: grid;
@@ -88,4 +84,17 @@
 .footer > button {
   margin: 15px 0 0 5px;
   color: var(--danger);
+}
+
+/* Body */
+
+.bodyHeadings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  grid-template-rows: 1fr;
+}
+
+.bodyContent {
+  display: grid;
+  grid-template-columns: 1fr;
 }

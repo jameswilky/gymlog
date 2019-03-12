@@ -38,11 +38,11 @@ export default function ExerciseHeader(props) {
       </div>
       {!showExercise ? (
         <div className={styles.tagContainer}>
-          {/* {tags.map(tag => (
+          {tags.map(tag => (
             <div className={styles.tag} key={uuid()}>
               {tag}
             </div>
-          ))} */}
+          ))}
         </div>
       ) : (
         <div />

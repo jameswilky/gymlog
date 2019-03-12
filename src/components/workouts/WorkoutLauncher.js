@@ -30,7 +30,7 @@ class WorkoutLauncher extends Component {
               className="content"
               onClick={e => this.clearSelections(e, dispatch)}
             >
-              <div className="container">
+              <div className="contentHeading">
                 {this.containsWorkouts.bind(this) ? (
                   selectedWorkout.id ? (
                     <h2>Start your Workout!</h2>
@@ -40,14 +40,17 @@ class WorkoutLauncher extends Component {
                 ) : (
                   <h2>Create a Workout</h2>
                 )}
-
-                {workouts.map(workout => (
-                  <Workout
-                    key={workout.id}
-                    workout={workout}
-                    selected={selectedWorkout.id == workout.id}
-                  />
-                ))}
+              </div>
+              <div className="contentBody">
+                <div className="container">
+                  {workouts.map(workout => (
+                    <Workout
+                      key={workout.id}
+                      workout={workout}
+                      selected={selectedWorkout.id == workout.id}
+                    />
+                  ))}
+                </div>
               </div>
 
               {selectedWorkout.id ? (
