@@ -28,7 +28,9 @@ export default function ExerciseBody(props) {
         <button className={styles.add}>
           <i
             className="fas fa-plus"
-            onClick={() => dispatch({ type: "ADD_SET", payload: { id } })}
+            onClick={() =>
+              dispatch({ type: "ADD_SET", payload: { id, isActive } })
+            }
           >
             {" "}
           </i>

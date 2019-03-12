@@ -54,7 +54,7 @@ class Set extends Component {
                   onClick={() =>
                     dispatch({
                       type: "DELETE_SET",
-                      payload: { set, id }
+                      payload: { set, id, isActive }
                     })
                   }
                 />

@@ -47,7 +47,7 @@
 7. Delete exercises from active workout
    ~~8. Update exercises name~~
    ~~9. Increment/decrement Reps~~
-8. Add Sets/Remove Sets
+   ~~8. Add Sets/Remove Sets~~
 
 ## Stats
 

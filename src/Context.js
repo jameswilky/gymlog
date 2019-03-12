@@ -142,7 +142,15 @@ const reducer = (state, action) => {
     }
     case "ADD_SET": {
       const append = exercise => [...exercise.sets, 5];
-      return updateExercise(append, "sets");
+
+      switch (action.payload.isActive) {
+        case true: {
+          return updateActiveExercise(append, "sets");
+        }
+        default: {
+          return updateExercise(append, "sets");
+        }
+      }
     }
     case "DELETE_SET": {
       const index = action.payload.set - 1;
@@ -150,8 +158,13 @@ const reducer = (state, action) => {
         ...exercise.sets.slice(0, index),
         ...exercise.sets.slice(index + 1)
       ];
-
-      return updateExercise(remove, "sets");
+      switch (action.payload.isActive) {
+        case true: {
+          return updateActiveExercise(remove, "sets");
+        }
+        default:
+          return updateExercise(remove, "sets");
+      }
     }
     case "INCREMENT_REP": {
       const index = action.payload.set - 1;
@@ -218,7 +231,8 @@ const reducer = (state, action) => {
       console.log("Loaded");
       return {
         ...state,
-        history: [...state.history, state.activeWorkout]
+        history: [...state.history, state.activeWorkout],
+        activeWorkout: { id: null }
       };
     }
     default:
