@@ -5,13 +5,18 @@ import styles from "./set.module.css";
 import { Consumer } from "../../Context";
 
 class Set extends Component {
-  render() {
-    const { set, reps, id, isActive } = this.props; // later to be pulled from state
+  constructor(props) {
+    console.log("constructing");
+    console.log(props.weight);
+    super(props);
+    this.state = { weight: props.weight };
+  }
 
+  render() {
+    const { set, reps, id, isActive, dispatch } = this.props;
     return (
       <Consumer>
         {value => {
-          const { dispatch } = value;
           return (
             <div className={styles.set}>
               <div>{set}</div>
@@ -44,7 +49,22 @@ class Set extends Component {
               </div>
               {isActive ? (
                 <div>
-                  <input type="number" />
+                  <input
+                    type="number"
+                    name="weight"
+                    value={this.state.weight}
+                    onChange={e => {
+                      this.setState({ [e.target.name]: e.target.value });
+                    }}
+                    onBlur={() => {
+                      const { weight } = this.state;
+                      console.log(`Weight after blur from state ${weight}`);
+                      this.props.dispatch({
+                        type: "UPDATE_WEIGHT",
+                        payload: { weight, id, set }
+                      });
+                    }}
+                  />
                 </div>
               ) : null}
               <div>

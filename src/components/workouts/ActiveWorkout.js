@@ -10,7 +10,7 @@ class ActiveWorkout extends Component {
       <Consumer>
         {value => {
           const { activeWorkout, dispatch } = value;
-          const { name, exercises } = activeWorkout;
+          const { exercises } = activeWorkout;
           return (
             <div className="content">
               <div className="container">
@@ -29,8 +29,8 @@ class ActiveWorkout extends Component {
                     className="card__add"
                     onClick={() => {
                       dispatch({
-                        type: "ADD_EXERCISE_TO_INSTANCE",
-                        payload: null
+                        type: "ADD_EXERCISE",
+                        payload: { isActive: true }
                       });
                     }}
                   >
@@ -41,9 +41,12 @@ class ActiveWorkout extends Component {
                 <Link to={{ pathname: "/" }}>
                   <div
                     className="main__button green"
-                    onClick={() => {
-                      dispatch({ type: "SAVE_WORKOUT", payload: null });
-                    }}
+                    // onClick={() => {
+                    //   dispatch({
+                    //     type: "SAVE_WORKOUT",
+                    //     payload: activeWorkout
+                    //   });
+                    // }}
                   >
                     <i className="fas fa-flag-checkered" />
                   </div>

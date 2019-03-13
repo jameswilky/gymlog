@@ -36,7 +36,8 @@ class Exercise extends Component {
 
   render() {
     const { showExercise, name, isActive } = this.state;
-    const { tags, sets, id } = this.props.exercise;
+    const { tags, sets, id, weight } = this.props.exercise;
+
     return (
       <Consumer>
         {value => {
@@ -68,8 +69,13 @@ class Exercise extends Component {
                     sets={sets}
                     tags={tags}
                     isActive={isActive}
+                    weight={weight}
                   />
-                  <ExerciseFooter id={id} dispatch={dispatch} />
+                  <ExerciseFooter
+                    id={id}
+                    dispatch={dispatch}
+                    isActive={isActive}
+                  />
                 </div>
               ) : null}
             </div>

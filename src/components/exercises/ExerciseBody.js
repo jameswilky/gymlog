@@ -4,7 +4,7 @@ import uuid from "uuid";
 import Set from "../sets/Set";
 
 export default function ExerciseBody(props) {
-  const { sets, id, dispatch, tags, isActive } = props;
+  const { sets, id, dispatch, tags, isActive, weight } = props;
   return (
     <div className={styles.body}>
       <div className={styles.bodyHeadings}>
@@ -14,6 +14,7 @@ export default function ExerciseBody(props) {
         <div />
       </div>
       <div className={styles.bodyContent}>
+        {/*id ==exercise id*/}
         {sets.map((reps, set) => (
           <Set
             reps={reps}
@@ -21,6 +22,8 @@ export default function ExerciseBody(props) {
             key={uuid()}
             id={id}
             isActive={isActive}
+            dispatch={dispatch}
+            weight={weight[set]}
           />
         ))}
       </div>

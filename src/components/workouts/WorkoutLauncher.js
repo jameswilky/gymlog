@@ -24,7 +24,7 @@ class WorkoutLauncher extends Component {
     return (
       <Consumer>
         {value => {
-          const { dispatch, workouts, selectedWorkout, activeWorkout } = value;
+          const { dispatch, workouts, selectedWorkout } = value;
           return (
             <div
               className="content"

@@ -51,6 +51,15 @@ const reducer = (state, action) => {
       )
     };
   };
+  const selectWorkout = () => {
+    return {
+      ...state, // Get State
+      selectedWorkout: state.workouts.find(
+        // Assign selectedWorkout as the selected workout object
+        workout => workout.id == action.payload.id
+      )
+    };
+  };
 
   switch (action.type) {
     case "ADD_WORKOUT": {
@@ -75,13 +84,7 @@ const reducer = (state, action) => {
       };
     }
     case "SELECT_WORKOUT": {
-      return {
-        ...state, // Get State
-        selectedWorkout: state.workouts.find(
-          // Assign selectedWorkout as the selected workout object
-          workout => workout.id == action.payload.id
-        )
-      };
+      return selectWorkout();
     }
     case "DESELECT_WORKOUT": {
       return {
@@ -94,25 +97,39 @@ const reducer = (state, action) => {
         id: uuid(),
         name: "New Exercise",
         tags: [],
-        sets: []
+        sets: [],
+        weight: []
       };
-      return {
-        ...state, //Get State
-        // Assign workouts array with in state
-        workouts: state.workouts.map(workout =>
-          //For each workout in the workouts array, check if the id matches
-          workout.id === action.payload.id
-            ? // If it does, return an object that:
-              /* 
-        1. Gets the matched workout object with "...workout",
-        2. Assigns exercises array in the work out object to:
-        3. An Array that gets the exercise array and then concatonates the new exercise object
-        */
-              { ...workout, exercises: [...workout.exercises, newExercise] }
-            : // Otherwise, assign the workout object to its previous state
-              workout
-        )
-      };
+
+      switch (action.payload.isActive) {
+        case true: {
+          return {
+            activeWorkout: {
+              ...state.activeWorkout, //get that workout
+              exercises: [...state.activeWorkout.exercises, newExercise]
+            }
+          };
+        }
+        default: {
+          return {
+            ...state, //Get State
+            // Assign workouts array with in state
+            workouts: state.workouts.map(workout =>
+              //For each workout in the workouts array, check if the id matches
+              workout.id === action.payload.id
+                ? // If it does, return an object that:
+                  /* 
+            1. Gets the matched workout object with "...workout",
+            2. Assigns exercises array in the work out object to:
+            3. An Array that gets the exercise array and then concatonates the new exercise object
+            */
+                  { ...workout, exercises: [...workout.exercises, newExercise] }
+                : // Otherwise, assign the workout object to its previous state
+                  workout
+            )
+          };
+        }
+      }
     }
     case "UPDATE_EXERCISE_NAME": {
       const update = () => {
@@ -121,24 +138,39 @@ const reducer = (state, action) => {
       return updateExercise(update, "name");
     }
     case "DELETE_EXERCISE": {
-      return {
-        ...state, // Get state
-        workouts: state.workouts.map((
-          workout // Map Each workout in workouts array if:
-        ) =>
-          // The exercises within the workout contiain an exercise which matches target ID
-          workout.exercises.some(exercise => exercise.id === action.payload.id)
-            ? {
-                // Then, Return each item in that workout which does NOT equal that ID
-                ...workout,
-                exercises: workout.exercises.filter(
-                  exercise => exercise.id !== action.payload.id
-                )
-              }
-            : // Otherwise, return an unmodifed workout object
-              workout
-        )
-      };
+      switch (action.payload.isActive) {
+        case true: {
+          return {
+            activeWorkout: {
+              ...state.activeWorkout, //get that workout
+              exercises: state.activeWorkout.exercises.filter(
+                exercise => exercise.id !== action.payload.id
+              )
+            }
+          };
+        }
+        default:
+          return {
+            ...state, // Get state
+            workouts: state.workouts.map((
+              workout // Map Each workout in workouts array if:
+            ) =>
+              // The exercises within the workout contiain an exercise which matches target ID
+              workout.exercises.some(
+                exercise => exercise.id === action.payload.id
+              )
+                ? {
+                    // Then, Return each item in that workout which does NOT equal that ID
+                    ...workout,
+                    exercises: workout.exercises.filter(
+                      exercise => exercise.id !== action.payload.id
+                    )
+                  }
+                : // Otherwise, return an unmodifed workout object
+                  workout
+            )
+          };
+      }
     }
     case "ADD_SET": {
       const append = exercise => [...exercise.sets, 5];
@@ -165,6 +197,16 @@ const reducer = (state, action) => {
         default:
           return updateExercise(remove, "sets");
       }
+    }
+    case "UPDATE_WEIGHT": {
+      const index = action.payload.set - 1;
+      const newWeight = parseInt(action.payload.weight);
+      const update = exercise =>
+        exercise.weight.map((set, i) => {
+          console.log(i, index);
+          return i == index ? newWeight : set;
+        });
+      return updateActiveExercise(update, "weight");
     }
     case "INCREMENT_REP": {
       const index = action.payload.set - 1;
@@ -202,31 +244,22 @@ const reducer = (state, action) => {
     }
 
     case "LOAD_WORKOUT": {
-      let x = {
-        ...state,
-        activeWorkout: { ...state.selectedWorkout, id: uuid() }
-      };
-      console.log(x);
+      const newWorkout = { ...state.selectedWorkout };
+
+      newWorkout.exercises.forEach(exercise => {
+        exercise.weight = [];
+        exercise.sets.forEach(set => {
+          exercise.weight.push(0);
+        });
+      });
       return {
         ...state,
-        activeWorkout: state.selectedWorkout,
-        id: action.payload.id
+        activeWorkout: newWorkout,
+        id: action.payload.id,
+        selectedWorkout: { id: null }
       };
     }
-    case "ADD_EXERCISE_TO_INSTANCE": {
-      const newExercise = {
-        id: uuid(),
-        name: "New Exercise",
-        tags: [],
-        sets: []
-      };
-      return {
-        activeWorkout: {
-          ...state.activeWorkout, //get that workout
-          exercises: [...state.activeWorkout.exercises, newExercise]
-        }
-      };
-    }
+
     case "SAVE_WORKOUT": {
       console.log("Loaded");
       return {
@@ -255,7 +288,8 @@ export default class Provider extends Component {
             id: 3,
             name: "Deadlift",
             tags: ["Clean", "Slow"],
-            sets: [10, 5, 5]
+            sets: [10, 5, 5],
+            weight: [10, 10, 10]
           }
         ]
       },
@@ -268,7 +302,8 @@ export default class Provider extends Component {
             id: 4,
             name: "Squat",
             tags: ["Front", "2ndpin"],
-            sets: [5, 5, 5]
+            sets: [5, 5, 5],
+            weight: [10, 10, 10]
           }
         ]
       }
