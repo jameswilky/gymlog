@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./main.css";
 import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
+import Calendar from "./components/calendar/Calendar";
 import WorkoutLauncher from "./components/workouts/WorkoutLauncher";
 import ActiveWorkout from "./components/workouts/ActiveWorkout";
 import Provider from "./Context";
@@ -19,6 +20,7 @@ class App extends Component {
               <Switch>
                 <Route path="/" component={WorkoutLauncher} exact />
                 <Route path="/active/:id" component={ActiveWorkout} />
+                <Route path="/history" component={Calendar} />
               </Switch>
               <Footer />
             </React.Fragment>

@@ -6,8 +6,6 @@ import { Consumer } from "../../Context";
 
 class Set extends Component {
   constructor(props) {
-    console.log("constructing");
-    console.log(props.weight);
     super(props);
     this.state = { weight: props.weight };
   }

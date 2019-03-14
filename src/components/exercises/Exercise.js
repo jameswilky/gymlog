@@ -11,17 +11,13 @@ import ExerciseFooter from "./ExerciseFooter";
 class Exercise extends Component {
   state = {
     showExercise: false,
-    name: "",
     isActive: false
   };
 
   componentDidMount() {
     /* On Load pass workout name into local state */
-    console.log(this.props);
-    const { name } = this.props.exercise;
     const { isActive } = this.props;
     this.setState({
-      name,
       isActive
     });
   }
@@ -35,8 +31,8 @@ class Exercise extends Component {
   };
 
   render() {
-    const { showExercise, name, isActive } = this.state;
-    const { tags, sets, id, weight } = this.props.exercise;
+    const { showExercise, isActive } = this.state;
+    const { tags, sets, id, weight, name } = this.props.exercise;
 
     return (
       <Consumer>
@@ -56,6 +52,7 @@ class Exercise extends Component {
                   this,
                   showExercise
                 )}
+                isActive={isActive}
               />
 
               {showExercise ? (

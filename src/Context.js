@@ -135,7 +135,13 @@ const reducer = (state, action) => {
       const update = () => {
         return action.payload.name;
       };
-      return updateExercise(update, "name");
+      switch (action.payload.isActive) {
+        case true: {
+          return { ...state }; // Do Not want to be able to change active exercise name
+        }
+        default:
+          return updateExercise(update, "name");
+      }
     }
     case "DELETE_EXERCISE": {
       switch (action.payload.isActive) {
@@ -173,6 +179,7 @@ const reducer = (state, action) => {
       }
     }
     case "ADD_SET": {
+      //To DO Add empty workout
       const append = exercise => [...exercise.sets, 5];
 
       switch (action.payload.isActive) {
