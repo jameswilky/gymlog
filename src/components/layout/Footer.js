@@ -11,6 +11,7 @@ class Footer extends Component {
             <div className="divider">|</div>
             <div className="divider" />
           </div>
+          {/* todo - check if active workout and redirect to active workout if available */}
           <Link to={{ pathname: "/" }}>
             <div>
               <i className="fas fa-dumbbell" />

@@ -54,24 +54,24 @@ class WorkoutLauncher extends Component {
               </div>
 
               {selectedWorkout.id ? (
-                <div
-                  className="main__button green"
-                  onClick={() =>
-                    dispatch({
-                      type: "LOAD_WORKOUT",
-                      payload: this.state.nextID
-                    })
-                  }
+                <Link
+                  to={{
+                    pathname: `/active/${this.state.nextID}`
+                  }}
                 >
-                  <Link
-                    to={{
-                      pathname: `/active/${this.state.nextID}`
-                    }}
+                  <div
+                    className="main__button green"
+                    onClick={() =>
+                      dispatch({
+                        type: "LOAD_WORKOUT",
+                        payload: this.state.nextID
+                      })
+                    }
                   >
                     {" "}
                     <i className="fas fa-play" />
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               ) : (
                 <div
                   className="main__button red"
