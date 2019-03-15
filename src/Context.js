@@ -268,11 +268,11 @@ const reducer = (state, action) => {
     }
 
     case "SAVE_WORKOUT": {
-      console.log("Loaded");
       return {
         ...state,
         history: [...state.history, state.activeWorkout],
-        activeWorkout: { id: null }
+        activeWorkout: { id: null },
+        date: new Date(Date.now())
       };
     }
     default:
@@ -315,7 +315,53 @@ export default class Provider extends Component {
         ]
       }
     ],
-    history: [],
+    history: [
+      {
+        id: 1,
+        // selected: false,
+        name: "Pull Day",
+        exercises: [
+          {
+            id: 3,
+            name: "Deadlift",
+            tags: ["Clean", "Slow"],
+            sets: [10, 5, 5],
+            weight: [10, 10, 10]
+          }
+        ],
+        date: new Date(Date.now())
+      },
+      {
+        id: 2,
+        // selected: false,
+        name: "Leg Day",
+        exercises: [
+          {
+            id: 4,
+            name: "Squat",
+            tags: ["Front", "2ndpin"],
+            sets: [5, 5, 5],
+            weight: [10, 10, 10]
+          }
+        ],
+        date: new Date(2019, 2, 1)
+      },
+      {
+        id: 10,
+        // selected: false,
+        name: "Push Day",
+        exercises: [
+          {
+            id: 45,
+            name: "Squat",
+            tags: ["Front", "2ndpin"],
+            sets: [5, 5, 5],
+            weight: [10, 10, 10]
+          }
+        ],
+        date: new Date(2019, 3, 1)
+      }
+    ],
     dispatch: action => {
       this.setState(state => reducer(state, action));
     }

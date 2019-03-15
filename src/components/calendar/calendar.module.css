@@ -1,11 +1,19 @@
 .header {
   display: grid;
-  grid-template-columns: 1fr 6fr 1fr;
+  grid-template-columns: 1fr 8fr 1fr;
   justify-items: center;
-  align-content: center;
+  align-items: center;
 }
 
 .container {
   display: grid;
   grid-template-rows: 50px auto;
+}
+.heading {
+  color: var(--secondary);
+}
+
+.arrow > i {
+  font-size: 2.5rem;
+  color: var(--primary);
 }

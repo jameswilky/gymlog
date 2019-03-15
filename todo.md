@@ -27,13 +27,6 @@
 
 ### Calendar
 
-- Create a calendar componenet:
-  - Create a month component
-    - Create a 'day' component:
-      - embedd a workout componenet that opens when clicking on a day where a workout was logged
-- Create Date logic, so that the correct amount of days are generated for the correct amount of days in that month
-- Create a search function to open up the correct date
 - Create an empty page to show when a day is opened and no workout was logged
-- Create a arrow keys to traverse dates
-- Create a Header displaying the month
-- Create a nav bar below the header showing the days of the week
+
+- Create a page to display a workout from history when a certain day is clicked

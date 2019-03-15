@@ -5,7 +5,7 @@ import Header from "./components/layout/Header";
 import Calendar from "./components/calendar/Calendar";
 import WorkoutLauncher from "./components/workouts/WorkoutLauncher";
 import ActiveWorkout from "./components/workouts/ActiveWorkout";
-import Provider from "./Context";
+import Provider, { Consumer } from "./Context";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 

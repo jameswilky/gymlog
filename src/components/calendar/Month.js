@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./month.module.css";
 const Month = props => {
   const { today, month, year, nDays } = props.date;
-  const { isCurrentMonth } = props;
+  const { isCurrentMonth, workouts } = props;
   //todo pass day that month starts
   let dates = [];
   const generateDates = () => {
@@ -12,6 +12,11 @@ const Month = props => {
     return dates;
   };
   dates = generateDates();
+
+  const workoutDays = workouts.map(workout => {
+    return workout.date.getDate();
+  });
+  console.log(workoutDays);
 
   // Read this https://reactjs.org/docs/jsx-in-depth.html#jsx-children
   return (
@@ -27,12 +32,18 @@ const Month = props => {
       </div>
       <div className={styles.body}>
         {dates.map(date => {
-          return date == today && isCurrentMonth ? (
-            <div className={[styles.date, styles.today].join(" ")} key={date}>
-              {date}
-            </div>
-          ) : (
-            <div className={styles.date} key={date}>
+          return (
+            <div
+              className={`${styles.date} ${
+                date == today && isCurrentMonth ? styles.today : null
+              }`} // If Its todays date and we are on the current month then highlight the date in green
+              key={date}
+              onClick={
+                workoutDays.includes(date)
+                  ? () => console.log("contains workout", date)
+                  : () => console.log("Does not contain workout", date)
+              }
+            >
               {date}
             </div>
           );
