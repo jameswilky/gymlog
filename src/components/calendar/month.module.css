@@ -18,10 +18,17 @@
 }
 
 .date {
-  border: 1px solid black;
+  border-right: 1px solid gainsboro;
+  border-bottom: 1px solid gainsboro;
   display: grid;
   width: 100%;
   height: 100%;
   justify-content: right;
   align-content: end;
+  padding: 10px;
+}
+
+.today {
+  border: 2px solid var(--secondary);
+  color: var(--primary);
 }

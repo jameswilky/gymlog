@@ -14,7 +14,7 @@ class Calendar extends Component {
     const year = new Date(now).getFullYear();
     const nDays = new Date(year, month + 1, 0).getDate();
     const date = { today, month, year, nDays };
-    this.setState({ date: date });
+    this.setState({ date: date, isCurrentMonth: true });
   }
 
   getMonthName() {
@@ -34,22 +34,21 @@ class Calendar extends Component {
     ];
     return monthNames[this.state.date.month];
   }
-  getNextYear(i) {
-    return this.state.date.year + i;
-  }
+
   getNextMonth(i) {
     let nextYear;
     let nextMonth = this.state.date.month + i;
     if (nextMonth < 0) {
       nextMonth = 11;
-      nextYear = this.getNextYear(-1);
+      nextYear = this.state.date.year - 1;
     } else if (nextMonth > 11) {
       nextMonth = 0;
-      nextYear = this.getNextYear(1);
+      nextYear = this.state.date.year + 1;
     } else {
       nextYear = this.state.date.year;
     }
     const nDays = new Date(nextYear, nextMonth + 1, 0).getDate();
+    const isCurrentMonth = new Date(Date.now()).getMonth() == nextMonth;
     this.setState({
       ...this.state,
       date: {
@@ -57,11 +56,13 @@ class Calendar extends Component {
         month: nextMonth,
         year: nextYear,
         nDays: nDays
-      }
+      },
+      isCurrentMonth: isCurrentMonth
     });
   }
   render() {
-    const { date } = this.state;
+    const { date, isCurrentMonth } = this.state;
+
     return (
       <div className="content">
         <div className={styles.container}>
@@ -80,7 +81,7 @@ class Calendar extends Component {
             </div>
           </div>
           <div className={styles.body}>
-            <Month date={date} />
+            <Month date={date} isCurrentMonth={isCurrentMonth} />
           </div>
         </div>
       </div>
