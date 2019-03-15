@@ -5,22 +5,18 @@ import Month from "./Month";
 class Calendar extends Component {
   constructor(props) {
     super(props);
-
     this.state = {};
   }
   componentWillMount() {
-    this.setCalendar();
-  }
-  setCalendar() {
     const now = Date.now();
     const today = new Date(now).getDate();
     const month = new Date(now).getMonth();
     const year = new Date(now).getFullYear();
-    const nDays = new Date(month, year, 0).getDate();
+    const nDays = new Date(year, month + 1, 0).getDate();
     const date = { today, month, year, nDays };
-
     this.setState({ date: date });
   }
+
   getMonthName() {
     const monthNames = [
       "January",
@@ -39,7 +35,6 @@ class Calendar extends Component {
     return monthNames[this.state.date.month];
   }
   getNextYear(i) {
-    console.log(this);
     return this.state.date.year + i;
   }
   getNextMonth(i) {
@@ -54,9 +49,15 @@ class Calendar extends Component {
     } else {
       nextYear = this.state.date.year;
     }
+    const nDays = new Date(nextYear, nextMonth + 1, 0).getDate();
     this.setState({
       ...this.state,
-      date: { ...this.state.date, month: nextMonth, year: nextYear }
+      date: {
+        ...this.state.date,
+        month: nextMonth,
+        year: nextYear,
+        nDays: nDays
+      }
     });
   }
   render() {

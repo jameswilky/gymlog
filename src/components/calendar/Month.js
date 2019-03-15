@@ -3,11 +3,10 @@ import styles from "./month.module.css";
 const Month = props => {
   const { today, month, year, nDays } = props.date;
   //todo pass day that month starts
-
   let dates = [];
   const generateDates = () => {
-    for (let i = 1; i < nDays; i++) {
-      dates.push(i);
+    for (let i = 0; i < nDays; i++) {
+      dates.push(i + 1);
     }
     return dates;
   };
