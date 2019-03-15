@@ -12,7 +12,16 @@
 }
 .body {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(7, minmax(50px, 1fr));
+  grid-template-columns: repeat(7, minmax(40px, 1fr));
+  grid-template-rows: repeat(5, minmax(70px, 1fr));
   justify-items: center;
+}
+
+.date {
+  border: 1px solid black;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  justify-content: right;
+  align-content: end;
 }

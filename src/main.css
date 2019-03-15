@@ -84,7 +84,7 @@ input {
 /*Content*/
 .content {
   top: 75px;
-  bottom: 150px;
+  bottom: 75px; /* 150px for workout page, maybe*/
   overflow: auto;
 }
 .contentHeading {
