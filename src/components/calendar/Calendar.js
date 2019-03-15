@@ -9,30 +9,38 @@ class Calendar extends Component {
     this.state = {};
   }
 
-  componentWillMount() {
+  updateCalendar() {
     const now = Date.now();
-    const currentMonthIndex = new Date(now).getMonth();
-    this.setState({ currentMonthIndex: currentMonthIndex });
+    const today = new Date(now).getDate();
+    const month = new Date(now).getMonth();
+    const year = new Date(now).getFullYear();
+    const nDays = new Date(month, year, 0).getDate();
+    const date = { today, month, year, nDays };
+
+    this.setState({ date: date });
+  }
+  componentWillMount() {
+    this.updateCalendar();
   }
   render() {
-    const { currentMonthIndex } = this.state;
+    const { date } = this.state;
     return (
       <div className="content">
         <div className={styles.container}>
           <div className={styles.header}>
             <div>
-              <i class="fas fa-caret-left" />
+              <i className="fas fa-caret-left" />
             </div>
             <div>
               {" "}
               <h1>Current Date</h1>
             </div>
             <div>
-              <i class="fas fa-caret-right" />
+              <i className="fas fa-caret-right" />
             </div>
           </div>
           <div className={styles.body}>
-            <Month month={currentMonthIndex} />
+            <Month date={date} />
           </div>
         </div>
       </div>

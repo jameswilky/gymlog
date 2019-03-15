@@ -1,51 +1,36 @@
-import React, { Component } from "react";
+import React from "react";
 import styles from "./month.module.css";
-export default class Month extends Component {
-  render() {
-    return (
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <div>M</div>
-          <div>T</div>
-          <div>W</div>
-          <div>Th</div>
-          <div>F</div>
-          <div>Sa</div>
-          <div>Su</div>
-        </div>
-        <div className={styles.body}>
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-          <div />
-        </div>
+const Month = props => {
+  const { today, month, year, nDays } = props.date;
+
+  let dates = [];
+  const generateDates = () => {
+    for (let i = 0; i < nDays; i++) {
+      dates.push(i);
+    }
+    return dates;
+  };
+  dates = generateDates();
+
+  // Read this https://reactjs.org/docs/jsx-in-depth.html#jsx-children
+  return (
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <div>M</div>
+        <div>T</div>
+        <div>W</div>
+        <div>Th</div>
+        <div>F</div>
+        <div>Sa</div>
+        <div>Su</div>
       </div>
-    );
-  }
-}
+      <div className={styles.body}>
+        {dates.map(date => (
+          <div>{date}</div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Month;
