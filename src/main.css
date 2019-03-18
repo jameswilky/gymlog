@@ -107,6 +107,7 @@ input {
 }
 a {
   color: white;
+  cursor: pointer;
 }
 
 .green {

@@ -101,6 +101,7 @@ class Calendar extends Component {
                     date={date}
                     isCurrentMonth={isCurrentMonth}
                     workouts={workouts}
+                    dispatch={dispatch}
                   />
                 </div>
               </div>

@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./month.module.css";
+import { Link } from "react-router-dom";
 const Month = props => {
   const { today, month, year, nDays } = props.date;
-  const { isCurrentMonth, workouts } = props;
+  const { isCurrentMonth, workouts, dispatch } = props;
   //todo pass day that month starts
+
   let dates = [];
   const generateDates = () => {
     for (let i = 1; i < nDays + 1; i++) {
@@ -12,13 +14,22 @@ const Month = props => {
     return dates;
   };
   dates = generateDates();
-
   const workoutDays = workouts.map(workout => {
     return workout.date.getDate();
   });
-  console.log(workoutDays);
 
-  // Read this https://reactjs.org/docs/jsx-in-depth.html#jsx-children
+  const ConditionalLink = props => {
+    const { children, to, condition } = props;
+    return condition ? <Link to={to}>{children}</Link> : children;
+  };
+
+  const getWorkoutByDate = date => {
+    return workouts.filter(
+      workout => date == new Date(workout.date).getDate()
+    )[0];
+  };
+  console.log(workouts);
+  getWorkoutByDate(1);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -34,17 +45,37 @@ const Month = props => {
         {dates.map(date => {
           return (
             <div
-              className={`${styles.date} ${
-                date == today && isCurrentMonth ? styles.today : null
-              }`} // If Its todays date and we are on the current month then highlight the date in green
+              className={`${styles.dateCell} 
+              ${date == today && isCurrentMonth ? styles.today : null}
+              ${
+                workoutDays.includes(date) && date != today
+                  ? styles.workoutDay
+                  : null
+              }
+              `}
               key={date}
               onClick={
                 workoutDays.includes(date)
-                  ? () => console.log("contains workout", date)
-                  : () => console.log("Does not contain workout", date)
+                  ? () =>
+                      dispatch({
+                        type: "VIEW_WORKOUT",
+                        payload: { id: getWorkoutByDate(date).id }
+                      })
+                  : null
               }
             >
-              {date}
+              <ConditionalLink
+                condition={workoutDays.includes(date)}
+                to={{
+                  pathname: `/log/${
+                    workoutDays.includes(date)
+                      ? getWorkoutByDate(date).id
+                      : null
+                  }`
+                }}
+              >
+                <div className={styles.inner}>{date}</div>
+              </ConditionalLink>
             </div>
           );
         })}

@@ -27,6 +27,4 @@
 
 ### Calendar
 
-- Create an empty page to show when a day is opened and no workout was logged
-
-- Create a page to display a workout from history when a certain day is clicked
+- Display the date completed in the title

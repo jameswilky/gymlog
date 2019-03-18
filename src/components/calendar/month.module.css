@@ -35,19 +35,32 @@
   justify-items: center;
 }
 
-.date {
+.dateCell {
   border-right: 1px solid gainsboro;
   border-bottom: 1px solid gainsboro;
   border-radius: 5px;
   display: grid;
   width: 100%;
   height: 100%;
-  justify-content: right;
-  align-content: end;
-  padding: 10px;
+  /* justify-content: right;
+  align-content: end; */
 }
 
 .today {
   border: 2px solid var(--secondary);
   color: var(--primary);
+}
+
+.workoutDay {
+  border: 2px solid var(--primary);
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  color: black;
+  justify-content: right;
+  align-content: end;
+  padding: 10px;
 }

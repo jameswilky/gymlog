@@ -275,6 +275,16 @@ const reducer = (state, action) => {
         date: new Date(Date.now())
       };
     }
+
+    case "VIEW_WORKOUT": {
+      return {
+        ...state,
+        loggedWorkout: state.history.filter(
+          workout => workout.id == action.payload.id
+        )[0]
+      };
+    }
+
     default:
       return state;
   }
@@ -284,6 +294,7 @@ export default class Provider extends Component {
     selectedWorkout: {
       id: null
     },
+    loggedWorkout: {},
     activeWorkout: {},
     workouts: [
       {
