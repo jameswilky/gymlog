@@ -19,6 +19,7 @@
 
 - # Error handling and warnings
 - generalise active workout and regular workout
+- Add Ability to shuffle exercises around
 
 ## Bugs/General
 

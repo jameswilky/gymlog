@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Exercise from "../exercises/Exercise";
 import styles from "./workout.module.css";
 import { Consumer } from "../../Context";
+import TestWorkout from "./TestWorkout";
 
 class Workout extends Component {
   state = {
@@ -78,25 +79,31 @@ class Workout extends Component {
               </div>
 
               {showCard ? (
-                <React.Fragment>
-                  <div className="card__body">
-                    {exercises.map(exercise => (
-                      <Exercise key={exercise.id} exercise={exercise} />
-                    ))}
-                  </div>
+                // <React.Fragment>
+                //   <div className="card__body">
+                //     {exercises.map(exercise => (
+                //       <Exercise key={exercise.id} exercise={exercise} />
+                //     ))}
+                //   </div>
 
-                  <div className="card__footer">
-                    <button
-                      className="card__add"
-                      onClick={() =>
-                        dispatch({ type: "ADD_EXERCISE", payload: { id } })
-                      }
-                    >
-                      <i className="fas fa-plus"> </i>
-                      Add
-                    </button>
-                  </div>
-                </React.Fragment>
+                //   <div className="card__footer">
+                //     <button
+                //       className="card__add"
+                //       onClick={() =>
+                //         dispatch({ type: "ADD_EXERCISE", payload: { id } })
+                //       }
+                //     >
+                //       <i className="fas fa-plus"> </i>
+                //       Add
+                //     </button>
+                //   </div>
+                // </React.Fragment>
+                <TestWorkout
+                  exercises={exercises}
+                  id={id}
+                  isActive={false}
+                  dispatch={dispatch}
+                />
               ) : null}
             </div>
           );
