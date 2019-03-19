@@ -33,6 +33,7 @@ class Exercise extends Component {
   render() {
     const { showExercise, isActive } = this.state;
     const { tags, sets, id, weight, name } = this.props.exercise;
+    const { exercise } = this.props;
 
     return (
       <Consumer>
@@ -67,6 +68,7 @@ class Exercise extends Component {
                     tags={tags}
                     isActive={isActive}
                     weight={weight}
+                    showContent={sets.length > 0}
                   />
                   <ExerciseFooter
                     id={id}

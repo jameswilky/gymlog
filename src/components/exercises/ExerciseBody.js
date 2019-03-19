@@ -4,15 +4,20 @@ import uuid from "uuid";
 import Set from "../sets/Set";
 
 export default function ExerciseBody(props) {
-  const { sets, id, dispatch, tags, isActive, weight } = props;
+  const { sets, id, dispatch, tags, isActive, weight, showContent } = props;
   return (
     <div className={styles.body}>
-      <div className={styles.bodyHeadings}>
-        <div>Sets</div>
-        <div>Reps</div>
-        {isActive ? <div>Weight</div> : null}
-        <div />
-      </div>
+      {showContent ? (
+        <div className={styles.bodyHeadings}>
+          <div>Sets</div>
+          <div>Reps</div>
+          {isActive ? <div>Weight</div> : null}
+          <div />
+        </div>
+      ) : (
+        <React.Fragment />
+      )}
+
       <div className={styles.bodyContent}>
         {/*id ==exercise id*/}
         {sets.map((reps, set) => (
@@ -40,19 +45,23 @@ export default function ExerciseBody(props) {
         </button>
       </div>
 
-      <div className={styles.tagContainer}>
-        {tags.map(tag => (
-          <div className={styles.tag} key={uuid()}>
-            {tag}
-          </div>
-        ))}
+      {showContent ? (
+        <div className={styles.tagContainer}>
+          {tags.map(tag => (
+            <div className={styles.tag} key={uuid()}>
+              {tag}
+            </div>
+          ))}
 
-        <div className={styles.createTagBtn}>
-          <i className="fas fa-plus" />
-          New Tag
-          <button type="button" onClick={() => {}} />
+          <div className={styles.createTagBtn}>
+            <i className="fas fa-plus" />
+            New Tag
+            <button type="button" onClick={() => {}} />
+          </div>
         </div>
-      </div>
+      ) : (
+        <React.Fragment />
+      )}
     </div>
   );
 }
