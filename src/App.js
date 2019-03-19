@@ -3,9 +3,8 @@ import "./main.css";
 import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 import Calendar from "./components/calendar/Calendar";
-import WorkoutLauncher from "./components/workouts/WorkoutLauncher";
-import ActiveWorkout from "./components/workouts/ActiveWorkout";
-import LoggedWorkout from "./components/workouts/LoggedWorkout";
+import WorkoutLauncher from "./components/launcher/WorkoutLauncher";
+import WorkoutViewer from "./components/workouts/WorkoutViewer";
 import Provider, { Consumer } from "./Context";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -19,10 +18,30 @@ class App extends Component {
             <React.Fragment>
               <Header />
               <Switch>
-                <Route path="/" component={WorkoutLauncher} exact />
-                <Route path="/active/:id" component={ActiveWorkout} />
-                <Route path="/history" component={Calendar} />
-                <Route path="/log/:id" component={LoggedWorkout} />
+                <Consumer>
+                  {value => {
+                    const { loggedWorkout, activeWorkout } = value;
+                    return (
+                      <React.Fragment>
+                        <Route path="/" component={WorkoutLauncher} exact />
+                        <Route
+                          path="/active/:id"
+                          render={() => (
+                            <WorkoutViewer workout={activeWorkout} />
+                          )}
+                        />
+                        <Route path="/history" component={Calendar} exact />
+
+                        <Route
+                          path="/history/:id"
+                          render={() => (
+                            <WorkoutViewer workout={loggedWorkout} />
+                          )}
+                        />
+                      </React.Fragment>
+                    );
+                  }}
+                </Consumer>
               </Switch>
               <Footer />
             </React.Fragment>

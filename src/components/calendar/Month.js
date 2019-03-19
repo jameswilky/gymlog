@@ -67,7 +67,7 @@ const Month = props => {
               <ConditionalLink
                 condition={workoutDays.includes(date)}
                 to={{
-                  pathname: `/log/${
+                  pathname: `/history/${
                     workoutDays.includes(date)
                       ? getWorkoutByDate(date).id
                       : null

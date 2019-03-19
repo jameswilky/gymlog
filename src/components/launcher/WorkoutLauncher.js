@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Workout from "../workouts/Workout";
+import WorkoutContainer from "./WorkoutContainer";
 import uuid from "uuid";
 import { Consumer } from "../../Context";
 import { Link } from "react-router-dom";
@@ -44,7 +44,7 @@ class WorkoutLauncher extends Component {
               <div className="contentBody">
                 <div className="container">
                   {workouts.map(workout => (
-                    <Workout
+                    <WorkoutContainer
                       key={workout.id}
                       workout={workout}
                       selected={selectedWorkout.id == workout.id}
