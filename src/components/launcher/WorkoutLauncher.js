@@ -4,14 +4,19 @@ import WorkoutContainer from "./WorkoutContainer";
 import uuid from "uuid";
 import { Consumer } from "../../Context";
 import { Link } from "react-router-dom";
+import styles from "./workoutLauncher.module.css";
 
 class WorkoutLauncher extends Component {
-  state = { nextID: uuid() };
-  clearSelections = (e, dispatch) => {
-    /* Temporary */
+  state = { nextID: uuid(), showModal: false };
+
+  clickIsOutside = e => {
     const clickedContainer = e.target.classList.contains("container");
     const clickedContent = e.target.classList.contains("content");
-    if (clickedContainer || clickedContent) {
+    return clickedContainer || clickedContent;
+  };
+
+  clearSelections = (e, dispatch) => {
+    if (this.clickIsOutside(e)) {
       dispatch({ type: "DESELECT_WORKOUT", payload: null });
     }
   };
@@ -73,14 +78,17 @@ class WorkoutLauncher extends Component {
                   </div>
                 </Link>
               ) : (
-                <div
-                  className="main__button red"
-                  onClick={() =>
-                    dispatch({ type: "ADD_WORKOUT", payload: null })
-                  }
-                >
-                  <i className="fas fa-plus" />
-                </div>
+                <Link to="/new">
+                  <div
+                    className="main__button red"
+                    onClick={() =>
+                      // dispatch({ type: "ADD_WORKOUT", payload: null })
+                      console.log("open workout form")
+                    }
+                  >
+                    <i className="fas fa-plus" />
+                  </div>
+                </Link>
               )}
             </div>
           );

@@ -18,9 +18,12 @@ class Footer extends Component {
             </div>
           </Link>
 
-          <div>
-            <i className="fas fa-chart-line" />
-          </div>
+          <Link to={{ pathname: "/analytics" }}>
+            <div>
+              <i className="fas fa-chart-line" />
+            </div>
+          </Link>
+
           <Link to={{ pathname: "/history" }}>
             <div onClick={() => console.log("history")}>
               <i className="fas fa-calendar" />

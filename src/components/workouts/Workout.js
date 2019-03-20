@@ -1,26 +1,25 @@
 import React from "react";
 import Exercise from "../exercises/Exercise";
+import styles from "./workout.module.css";
 
 export default function Workout(props) {
   const { exercises, isActive, id, dispatch } = props;
-  console.log(props);
   return (
     <React.Fragment>
-      <div className="card__body">
+      <div>
         {exercises.map(exercise => (
           <Exercise key={exercise.id} exercise={exercise} isActive={isActive} />
         ))}
       </div>
 
-      <div className="card__footer">
+      <div>
         <button
-          className="card__add"
           onClick={() =>
             dispatch({ type: "ADD_EXERCISE", payload: { id, isActive } })
           }
         >
           <i className="fas fa-plus"> </i>
-          Add
+          Add Exercise
         </button>
       </div>
     </React.Fragment>

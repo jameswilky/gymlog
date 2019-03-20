@@ -1,0 +1,18 @@
+.form {
+  padding: 10px;
+}
+
+.container {
+  padding-right: 10px;
+}
+
+.container input {
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgb(120, 120, 120);
+  padding: 10px;
+  text-align: center;
+}
+
+.container input::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
