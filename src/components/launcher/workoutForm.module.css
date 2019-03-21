@@ -10,9 +10,20 @@
   margin-bottom: 20px;
   border-bottom: 1px solid rgb(120, 120, 120);
   padding: 10px;
-  text-align: center;
+  display: grid;
 }
 
 .container input::placeholder {
   color: rgba(0, 0, 0, 0.3);
+}
+
+.showRepsAndSets {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+}
+.hideRepsAndSets {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.item1 {
 }

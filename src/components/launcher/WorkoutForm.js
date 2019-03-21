@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import styles from "./workoutForm.module.css";
-import Autocomplete from "../autocomplete/Autocomplete";
-import Autocomplete2 from "../autocomplete/Autocomplete2";
+import ExerciseInputField from "./ExerciseInputField";
 
 export default function WorkoutForm() {
   const [workoutName, setWorkoutName] = useState("");
   const [newExerciseName, setNewExerciseName] = useState("");
-
+  const exercise = {
+    id: 3,
+    name: "Deadlift",
+    tags: ["Clean", "Slow"],
+    sets: [10, 5, 5],
+    weight: [10, 10, 10]
+  };
   return (
     <div className="content">
       <div className="contentHeading">
@@ -27,28 +32,7 @@ export default function WorkoutForm() {
                   />
                 </h2>
               </div>
-              <div>
-                {/* Map Exercises to here */}
-                <Autocomplete suggestions={["test1", "test2", "apple"]} />
-              </div>
-              <div>
-                {" "}
-                {/* On Blur, add exercise  */}
-                <input
-                  type="text"
-                  placeholder="Add Exercise"
-                  value={newExerciseName}
-                  onChange={e => {
-                    // open autocomplete and sugegst exercise
-                    setNewExerciseName(e.target.value);
-                  }}
-                  onBlur={e => {
-                    // Submit Exercise to state
-                    setNewExerciseName("");
-                  }}
-                  name="exercise"
-                />
-              </div>
+              <ExerciseInputField />
             </div>
           </form>
         </div>

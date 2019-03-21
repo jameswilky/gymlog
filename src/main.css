@@ -15,7 +15,8 @@ html {
 }
 
 :root {
-  --primary: #344a72;
+  --primary: hsl(219, 37%, 33%);
+
   --secondary: #49c1a2;
   --secondary-dark: #37a08e;
   --danger: #ff4c46;
