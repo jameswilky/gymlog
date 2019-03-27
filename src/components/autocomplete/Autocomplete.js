@@ -1,12 +1,16 @@
 import React, { useState, Fragment } from "react";
 import styles from "./autocomplete.module.css";
 
-export default function Autocomplete({ suggestions }) {
+export default function Autocomplete(props) {
+  const { suggestions, changeHandler, exerciseIndex } = props;
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [filteredSuggestions, setFilteredSuggesions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [userInput, setUserInput] = useState("");
 
+  const onBlur = e => {
+    setShowSuggestions(false);
+  };
   const onChange = e => {
     const userInput = e.currentTarget.value;
     // filter out suggestions that dont contain the user's input
@@ -14,6 +18,7 @@ export default function Autocomplete({ suggestions }) {
       suggestion =>
         suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
+    changeHandler(e, exerciseIndex, "name"); // temp
     setUserInput(userInput);
     setShowSuggestions(true);
     setFilteredSuggesions(nextFilteredSuggestions);
@@ -85,6 +90,7 @@ export default function Autocomplete({ suggestions }) {
         onKeyDown={onKeyDown}
         value={userInput}
         placeholder={"Add Exercise"}
+        onBlur={onBlur}
       />
       {SuggestionsListComponent}
     </Fragment>

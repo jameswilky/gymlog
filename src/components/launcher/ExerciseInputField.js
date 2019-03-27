@@ -1,25 +1,35 @@
 import React, { useState } from "react";
 import styles from "./workoutForm.module.css";
 import Autocomplete from "../autocomplete/Autocomplete";
-import { useInput } from "../../hooks/inputHook";
 
 export default function ExerciseInputField(props) {
-  const { exercise, key } = props;
-  const { value: sets, bind: bindSets } = useInput("");
-  const { value: reps, bind: bindReps } = useInput("");
+  const { exercise, index, changeHandler } = props;
 
-  // ToDo on update show once an exercise is selected
   return (
     <div className={styles.exerciseForm}>
       <div>
-        <Autocomplete suggestions={["Deadlift", "Squat", "Bicep Curls"]} />
+        <Autocomplete
+          suggestions={["Deadlift", "Squat", "Bicep Curls"]}
+          changeHandler={changeHandler}
+          exerciseIndex={index}
+        />
       </div>
       <React.Fragment>
         <div>
-          <input type="number" placeholder="Sets" {...bindSets} />
+          <input
+            type="number"
+            placeholder="Sets"
+            value={exercise.sets}
+            onChange={e => changeHandler(e, index, "sets")}
+          />
         </div>
         <div>
-          <input type="number" placeholder="Reps" {...bindReps} />
+          <input
+            type="number"
+            placeholder="Reps"
+            value={exercise.reps}
+            onChange={e => changeHandler(e, index, "reps")}
+          />
         </div>
       </React.Fragment>
     </div>
