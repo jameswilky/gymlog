@@ -4,7 +4,8 @@ import ExerciseInputField from "./ExerciseInputField";
 import { useInput } from "../../hooks/inputHook";
 import { Link } from "react-router-dom";
 
-export default function WorkoutForm() {
+export default function WorkoutForm(props) {
+  const { dispatch } = props;
   const { value: workoutName, bind: bindWorkoutName } = useInput("");
   const [exercises, setExercises] = useState([
     { name: "", sets: "", reps: "" }
@@ -14,7 +15,12 @@ export default function WorkoutForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(exercises);
+    let newWorkout = {
+      name: workoutName,
+      exercises
+    };
+
+    dispatch({ type: "ADD_WORKOUT", payload: newWorkout });
   };
   const handleChange = (e, index, target) => {
     const items = [...exercises];

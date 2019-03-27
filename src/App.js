@@ -22,7 +22,7 @@ class App extends Component {
               <Switch>
                 <Consumer>
                   {value => {
-                    const { loggedWorkout, activeWorkout } = value;
+                    const { loggedWorkout, activeWorkout, dispatch } = value;
                     return (
                       <React.Fragment>
                         <Route path="/" component={WorkoutLauncher} exact />
@@ -42,7 +42,11 @@ class App extends Component {
                         />
                         <Route path="/analytics" component={Analytics} exact />
 
-                        <Route path="/new" component={WorkoutForm} exact />
+                        <Route
+                          path="/new"
+                          render={() => <WorkoutForm dispatch={dispatch} />}
+                          exact
+                        />
                       </React.Fragment>
                     );
                   }}

@@ -63,11 +63,8 @@ const reducer = (state, action) => {
 
   switch (action.type) {
     case "ADD_WORKOUT": {
-      const newWorkout = {
-        id: uuid(),
-        name: "New Workout",
-        exercises: []
-      };
+      let newWorkout = action.payload;
+      newWorkout.id = uuid();
       return {
         ...state,
         workouts: [...state.workouts, newWorkout]
