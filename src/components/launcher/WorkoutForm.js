@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import styles from "./workoutForm.module.css";
 import ExerciseInputField from "./ExerciseInputField";
+import { useInput } from "../../hooks/inputHook";
 
 export default function WorkoutForm() {
-  const [workoutName, setWorkoutName] = useState("");
-  const [newExerciseName, setNewExerciseName] = useState("");
-  const exercise = {
-    id: 3,
-    name: "Deadlift",
-    tags: ["Clean", "Slow"],
-    sets: [10, 5, 5],
-    weight: [10, 10, 10]
+  const { value: workoutName, bind: bindWorkoutName } = useInput("");
+  const [exercises, setExercises] = useState([{}]);
+
+  const handleSubmit = e => {
+    console.log(workoutName);
+
+    e.preventDefault();
   };
   return (
     <div className="content">
@@ -19,21 +19,26 @@ export default function WorkoutForm() {
       </div>
       <div className="contentBody">
         <div className="card">
-          <form className={styles.form}>
+          <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.container}>
               <div>
                 <h2>
                   <input
                     type="text"
                     placeholder="Enter Workout Name"
-                    value={workoutName}
-                    onChange={e => setWorkoutName(e.target.value)}
+                    {...bindWorkoutName}
                     name="name"
                   />
                 </h2>
               </div>
-              <ExerciseInputField />
+              {exercises.map((exercise, index) => {
+                return <ExerciseInputField key={index} exercise={exercise} />;
+              })}
+              <button onClick={() => setExercises([...exercises, {}])}>
+                <i className="fas fa-plus"> </i>
+              </button>
             </div>
+            <input type="submit" value="Submit" />
           </form>
         </div>
       </div>

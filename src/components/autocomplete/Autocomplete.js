@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import styles from "./autocomplete.module.css";
 
-export default function Autocomplete({ suggestions, setShow }) {
+export default function Autocomplete({ suggestions }) {
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [filteredSuggestions, setFilteredSuggesions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -18,7 +18,6 @@ export default function Autocomplete({ suggestions, setShow }) {
     setShowSuggestions(true);
     setFilteredSuggesions(nextFilteredSuggestions);
     setActiveSuggestion(0);
-    setShow(false);
   };
   // event fired when the use clicks on a suggestion
   const onClick = e => {
@@ -33,7 +32,6 @@ export default function Autocomplete({ suggestions, setShow }) {
         setActiveSuggestion(0);
         setShowSuggestions(false);
         setUserInput(filteredSuggestions[activeSuggestion]);
-        setShow(true);
       case 38: // Up Arrow
         if (activeSuggestion === 0) {
           return;
@@ -73,7 +71,7 @@ export default function Autocomplete({ suggestions, setShow }) {
     } else {
       SuggestionsListComponent = (
         <div className={styles.suggestionActive}>
-          <em>No suggestions, you're on your own!</em>
+          <em>Create New Exercise</em>
         </div>
       );
     }
