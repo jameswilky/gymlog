@@ -63,8 +63,23 @@ const reducer = (state, action) => {
 
   switch (action.type) {
     case "ADD_WORKOUT": {
-      let newWorkout = action.payload;
-      newWorkout.id = uuid();
+      let { workoutName, exercises } = action.payload;
+
+      const newWorkout = {
+        id: uuid(),
+        name: workoutName,
+        exercises: exercises.map(exercise => {
+          return {
+            name: "test",
+            /* Create an array of numbers equal to the exercise.reps and length exercise.sets*/
+            sets: Array(parseInt(exercise.sets)).fill(parseInt(exercise.reps)),
+            id: uuid(),
+            tags: ["Clean", "Slow"]
+          };
+        })
+      };
+
+      console.log(newWorkout);
       return {
         ...state,
         workouts: [...state.workouts, newWorkout]

@@ -15,12 +15,7 @@ export default function WorkoutForm(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    let newWorkout = {
-      name: workoutName,
-      exercises
-    };
-
-    dispatch({ type: "ADD_WORKOUT", payload: newWorkout });
+    dispatch({ type: "ADD_WORKOUT", payload: { workoutName, exercises } });
   };
   const handleChange = (e, index, target) => {
     const items = [...exercises];
