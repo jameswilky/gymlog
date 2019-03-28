@@ -70,19 +70,29 @@ const reducer = (state, action) => {
         name: workoutName,
         exercises: exercises.map(exercise => {
           return {
-            name: "test",
+            name: exercise.name,
             /* Create an array of numbers equal to the exercise.reps and length exercise.sets*/
             sets: Array(parseInt(exercise.sets)).fill(parseInt(exercise.reps)),
             id: uuid(),
-            tags: ["Clean", "Slow"]
+            tags: ["Clean", "Slow"],
+            weight: []
           };
         })
       };
 
-      console.log(newWorkout);
+      console.log(action.payload);
       return {
         ...state,
         workouts: [...state.workouts, newWorkout]
+      };
+    }
+    case "DELETE_WORKOUT": {
+      return {
+        ...state,
+        workouts: state.workouts.filter(
+          workout => workout.id != state.selectedWorkout.id
+        ),
+        selectededWorkout: { id: null }
       };
     }
     case "UPDATE_WORKOUT_NAME": {

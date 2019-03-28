@@ -59,36 +59,42 @@ class WorkoutLauncher extends Component {
               </div>
 
               {selectedWorkout.id ? (
-                <Link
-                  to={{
-                    pathname: `/active/${this.state.nextID}`
-                  }}
-                >
+                <React.Fragment>
+                  <Link
+                    to={{
+                      pathname: `/active/${this.state.nextID}`
+                    }}
+                  >
+                    <div
+                      className="main__button green"
+                      onClick={() =>
+                        dispatch({
+                          type: "LOAD_WORKOUT",
+                          payload: this.state.nextID
+                        })
+                      }
+                    >
+                      {" "}
+                      <i className="fas fa-play" />
+                    </div>
+                  </Link>
                   <div
-                    className="main__button green"
+                    className="alt__button red"
                     onClick={() =>
-                      dispatch({
-                        type: "LOAD_WORKOUT",
-                        payload: this.state.nextID
-                      })
+                      dispatch({ type: "DELETE_WORKOUT", payload: null })
                     }
                   >
-                    {" "}
-                    <i className="fas fa-play" />
+                    <i className="fa fa-trash" />
                   </div>
-                </Link>
+                </React.Fragment>
               ) : (
-                <Link to="/new">
-                  <div
-                    className="main__button red"
-                    onClick={() =>
-                      // dispatch({ type: "ADD_WORKOUT", payload: null })
-                      console.log("open workout form")
-                    }
-                  >
-                    <i className="fas fa-plus" />
-                  </div>
-                </Link>
+                <React.Fragment>
+                  <Link to="/new">
+                    <div className="main__button red">
+                      <i className="fas fa-plus" />
+                    </div>
+                  </Link>
+                </React.Fragment>
               )}
             </div>
           );
