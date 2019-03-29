@@ -2,7 +2,6 @@
 
 This app is used for creating and recording workouts at the gym, and logging them into a calendar.
 
-=======================================
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
