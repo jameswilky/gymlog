@@ -73,8 +73,7 @@ const reducer = (state, action) => {
             name: "test",
             /* Create an array of numbers equal to the exercise.reps and length exercise.sets*/
             sets: Array(parseInt(exercise.sets)).fill(parseInt(exercise.reps)),
-            id: uuid(),
-            tags: []
+            id: uuid()
           };
         })
       };
@@ -108,7 +107,6 @@ const reducer = (state, action) => {
       const newExercise = {
         id: uuid(),
         name: "New Exercise",
-        tags: [],
         sets: [],
         weight: []
       };
@@ -302,6 +300,13 @@ const reducer = (state, action) => {
   }
 };
 export default class Provider extends Component {
+  componentDidMount() {
+    const cachedState = localStorage.getItem("state");
+    this.setState(JSON.parse(cachedState));
+  }
+  componentDidUpdate() {
+    localStorage.setItem("state", JSON.stringify(this.state));
+  }
   state = {
     selectedWorkout: {
       id: null
@@ -309,81 +314,76 @@ export default class Provider extends Component {
     loggedWorkout: {},
     activeWorkout: {},
     workouts: [
-      {
-        id: 1,
-        // selected: false,
-        name: "Pull Day",
-        exercises: [
-          {
-            id: 3,
-            name: "Deadlift",
-            tags: ["Clean", "Slow"],
-            sets: [10, 5, 5],
-            weight: [10, 10, 10]
-          }
-        ]
-      },
-      {
-        id: 2,
-        // selected: false,
-        name: "Leg Day",
-        exercises: [
-          {
-            id: 4,
-            name: "Squat",
-            tags: ["Front", "2ndpin"],
-            sets: [5, 5, 5],
-            weight: [10, 10, 10]
-          }
-        ]
-      }
+      // {
+      //   id: 1,
+      //   // selected: false,
+      //   name: "Pull Day",
+      //   exercises: [
+      //     {
+      //       id: 3,
+      //       name: "Deadlift",
+      //       sets: [10, 5, 5],
+      //       weight: [10, 10, 10]
+      //     }
+      //   ]
+      // },
+      // {
+      //   id: 2,
+      //   // selected: false,
+      //   name: "Leg Day",
+      //   exercises: [
+      //     {
+      //       id: 4,
+      //       name: "Squat",
+      //       sets: [5, 5, 5],
+      //       weight: [10, 10, 10]
+      //     }
+      //   ]
+      // }
     ],
     history: [
-      {
-        id: 1,
-        // selected: false,
-        name: "Pull Day",
-        exercises: [
-          {
-            id: 3,
-            name: "Deadlift",
-            tags: ["Clean", "Slow"],
-            sets: [10, 5, 5],
-            weight: [10, 10, 10]
-          }
-        ],
-        date: new Date(Date.now())
-      },
-      {
-        id: 2,
-        // selected: false,
-        name: "Leg Day",
-        exercises: [
-          {
-            id: 4,
-            name: "Squat",
-            tags: ["Front", "2ndpin"],
-            sets: [5, 5, 5],
-            weight: [10, 10, 10]
-          }
-        ],
-        date: new Date(2019, 2, 1)
-      },
-      {
-        id: 10,
-        // selected: false,
-        name: "Push Day",
-        exercises: [
-          {
-            id: 45,
-            name: "Squat",
-            tags: ["Front", "2ndpin"],
-            sets: [5, 5, 5],
-            weight: [10, 10, 10]
-          }
-        ],
-        date: new Date(2019, 3, 1)
-      }
+      // {
+      //   id: 1,
+      //   // selected: false,
+      //   name: "Pull Day",
+      //   exercises: [
+      //     {
+      //       id: 3,
+      //       name: "Deadlift",
+      //       sets: [10, 5, 5],
+      //       weight: [10, 10, 10]
+      //     }
+      //   ],
+      //   date: new Date(Date.now())
+      // },
+      // {
+      //   id: 2,
+      //   // selected: false,
+      //   name: "Leg Day",
+      //   exercises: [
+      //     {
+      //       id: 4,
+      //       name: "Squat",
+      //       sets: [5, 5, 5],
+      //       weight: [10, 10, 10]
+      //     }
+      //   ],
+      //   date: new Date(2019, 2, 1)
+      // },
+      // {
+      //   id: 10,
+      //   // selected: false,
+      //   name: "Push Day",
+      //   exercises: [
+      //     {
+      //       id: 45,
+      //       name: "Squat",
+      //       sets: [5, 5, 5],
+      //       weight: [10, 10, 10]
+      //     }
+      //   ],
+      //   date: new Date(2019, 3, 1)
+      // }
     ],
     dispatch: action => {
       this.setState(state => reducer(state, action));

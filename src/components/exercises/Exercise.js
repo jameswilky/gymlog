@@ -32,7 +32,7 @@ class Exercise extends Component {
 
   render() {
     const { showExercise, isActive } = this.state;
-    const { tags, sets, id, weight, name } = this.props.exercise;
+    const { sets, id, weight, name } = this.props.exercise;
     const { exercise } = this.props;
 
     return (
@@ -42,12 +42,10 @@ class Exercise extends Component {
           return (
             <div className={styles.container}>
               <ExerciseHeader
-                // props={(id, name, dispatch, showExercise, tags)}
                 id={id}
                 name={name}
                 dispatch={dispatch}
                 showExercise={showExercise}
-                tags={tags}
                 onChangeHandler={this.onChange.bind(this)}
                 toggleExerciseHandler={this.toggleExercise.bind(
                   this,
@@ -65,7 +63,6 @@ class Exercise extends Component {
                     id={id}
                     dispatch={dispatch}
                     sets={sets}
-                    tags={tags}
                     isActive={isActive}
                     weight={weight}
                     showContent={sets.length > 0}

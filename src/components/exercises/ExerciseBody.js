@@ -4,7 +4,7 @@ import uuid from "uuid";
 import Set from "../sets/Set";
 
 export default function ExerciseBody(props) {
-  const { sets, id, dispatch, tags, isActive, weight, showContent } = props;
+  const { sets, id, dispatch, isActive, weight, showContent } = props;
   return (
     <div className={styles.body}>
       {showContent ? (
@@ -46,19 +46,7 @@ export default function ExerciseBody(props) {
       </div>
 
       {showContent ? (
-        <div className={styles.tagContainer}>
-          {tags.map(tag => (
-            <div className={styles.tag} key={uuid()}>
-              {tag}
-            </div>
-          ))}
-
-          <div className={styles.createTagBtn}>
-            <i className="fas fa-plus" />
-            New Tag
-            <button type="button" onClick={() => {}} />
-          </div>
-        </div>
+        <div className={styles.tagContainer} />
       ) : (
         <React.Fragment />
       )}

@@ -13,7 +13,6 @@ export default class ExerciseHeader extends Component {
       id,
       dispatch,
       showExercise,
-      tags,
       toggleExerciseHandler,
       isActive
     } = this.props;
@@ -46,17 +45,7 @@ export default class ExerciseHeader extends Component {
             }}
           />
         </div>
-        {!showExercise ? (
-          <div className={styles.tagContainer}>
-            {tags.map(tag => (
-              <div className={styles.tag} key={uuid()}>
-                {tag}
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div />
-        )}
+        {!showExercise ? <div className={styles.tagContainer} /> : <div />}
 
         <div>
           <i

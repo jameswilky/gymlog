@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import WorkoutContainer from "./WorkoutContainer";
 import uuid from "uuid";
 import { Consumer } from "../../Context";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import styles from "./workoutLauncher.module.css";
 
 class WorkoutLauncher extends Component {
@@ -30,67 +30,74 @@ class WorkoutLauncher extends Component {
       <Consumer>
         {value => {
           const { dispatch, workouts, selectedWorkout } = value;
-          return (
-            <div
-              className="content"
-              onClick={e => this.clearSelections(e, dispatch)}
-            >
-              <div className="contentHeading">
-                {this.containsWorkouts.bind(this) ? (
-                  selectedWorkout.id ? (
-                    <h2>Start your Workout!</h2>
-                  ) : (
-                    <h2>Select A Workout</h2>
-                  )
-                ) : (
-                  <h2>Create a Workout</h2>
-                )}
-              </div>
-              <div className="contentBody">
-                <div className="container">
-                  {workouts.map(workout => (
-                    <WorkoutContainer
-                      key={workout.id}
-                      workout={workout}
-                      selected={selectedWorkout.id == workout.id}
-                    />
-                  ))}
-                </div>
-              </div>
 
-              {selectedWorkout.id ? (
-                <Link
-                  to={{
-                    pathname: `/active/${this.state.nextID}`
-                  }}
+          return (
+            <React.Fragment>
+              {this.containsWorkouts() ? (
+                <div
+                  className="content"
+                  onClick={e => this.clearSelections(e, dispatch)}
                 >
-                  <div
-                    className="main__button green"
-                    onClick={() =>
-                      dispatch({
-                        type: "LOAD_WORKOUT",
-                        payload: this.state.nextID
-                      })
-                    }
-                  >
-                    {" "}
-                    <i className="fas fa-play" />
+                  <div className="contentHeading">
+                    {this.containsWorkouts.bind(this) ? (
+                      selectedWorkout.id ? (
+                        <h2>Start your Workout!</h2>
+                      ) : (
+                        <h2>Select A Workout</h2>
+                      )
+                    ) : (
+                      <h2>Create a Workout</h2>
+                    )}
                   </div>
-                </Link>
+                  <div className="contentBody">
+                    <div className="container">
+                      {workouts.map(workout => (
+                        <WorkoutContainer
+                          key={workout.id}
+                          workout={workout}
+                          selected={selectedWorkout.id == workout.id}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {selectedWorkout.id ? (
+                    <Link
+                      to={{
+                        pathname: `/active/${this.state.nextID}`
+                      }}
+                    >
+                      <div
+                        className="main__button green"
+                        onClick={() =>
+                          dispatch({
+                            type: "LOAD_WORKOUT",
+                            payload: this.state.nextID
+                          })
+                        }
+                      >
+                        {" "}
+                        <i className="fas fa-play" />
+                      </div>
+                    </Link>
+                  ) : (
+                    <Link to="/new">
+                      <div
+                        className="main__button red"
+                        onClick={() =>
+                          // dispatch({ type: "ADD_WORKOUT", payload: null })
+                          console.log("open workout form")
+                        }
+                      >
+                        <i className="fas fa-plus" />
+                      </div>
+                    </Link>
+                  )}
+                </div>
               ) : (
-                <Link to="/new">
-                  <div
-                    className="main__button red"
-                    onClick={() =>
-                      // dispatch({ type: "ADD_WORKOUT", payload: null })
-                      console.log("open workout form")
-                    }
-                  >
-                    <i className="fas fa-plus" />
-                  </div>
-                </Link>
+                <Redirect to="/new" />
               )}
-            </div>
+            </React.Fragment>
           );
         }}
       </Consumer>

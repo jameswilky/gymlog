@@ -40,7 +40,6 @@ class App extends Component {
                             <WorkoutViewer workout={loggedWorkout} />
                           )}
                         />
-                        <Route path="/analytics" component={Analytics} exact />
 
                         <Route
                           path="/new"
