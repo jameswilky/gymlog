@@ -32,9 +32,6 @@ class WorkoutLauncher extends Component {
           const { dispatch, workouts, selectedWorkout } = value;
 
           return (
-            <React.Fragment>
-              {console.log(this)}
-              {this.containsWorkouts(workouts) ? (
                 <div
                   className="content"
                   onClick={e => this.clearSelections(e, dispatch)}
@@ -102,8 +99,7 @@ class WorkoutLauncher extends Component {
                     </Link>
                   )}
                 </div>
-              ) : // <Redirect to="/new" />
-              null}
+           
             </React.Fragment>
           );
         }}
