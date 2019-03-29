@@ -11,13 +11,15 @@ class Footer extends Component {
             <div className="divider" />
           </div>
           {/* todo - check if active workout and redirect to active workout if available */}
-          <Link to={{ pathname: "/" }}>
+          <Link to={{ pathname: "https://jameswilky.github.io/gymlog" }}>
             <div>
               <i className="fas fa-dumbbell" />
             </div>
           </Link>
 
-          <Link to={{ pathname: "/history" }}>
+          <Link
+            to={{ pathname: "https://jameswilky.github.io/gymlog/history" }}
+          >
             <div onClick={() => console.log("history")}>
               <i className="fas fa-calendar" />
             </div>

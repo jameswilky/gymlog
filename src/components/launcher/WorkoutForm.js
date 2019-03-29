@@ -66,7 +66,10 @@ export default function WorkoutForm(props) {
         </div>
         {formValid ? (
           <div className="main__button green" onClick={e => handleSubmit(e)}>
-            <Link to="/" className={styles.link}>
+            <Link
+              to="https://jameswilky.github.io/gymlog"
+              className={styles.link}
+            >
               <i className={`fas fa-paper-plane ${styles.icon}`} />{" "}
             </Link>
           </div>

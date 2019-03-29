@@ -25,9 +25,13 @@ class App extends Component {
                     const { loggedWorkout, activeWorkout, dispatch } = value;
                     return (
                       <React.Fragment>
-                        <Route path="/" component={WorkoutLauncher} exact />
                         <Route
-                          path="/active/:id"
+                          path="https://jameswilky.github.io/gymlog"
+                          component={WorkoutLauncher}
+                          exact
+                        />
+                        <Route
+                          path="https://jameswilky.github.io/gymlog/active/:id"
                           render={() => (
                             <WorkoutViewer workout={activeWorkout} />
                           )}
@@ -35,14 +39,14 @@ class App extends Component {
                         <Route path="/history" component={Calendar} exact />
 
                         <Route
-                          path="/history/:id"
+                          path="https://jameswilky.github.io/gymlog/history/:id"
                           render={() => (
                             <WorkoutViewer workout={loggedWorkout} />
                           )}
                         />
 
                         <Route
-                          path="/new"
+                          path="https://jameswilky.github.io/gymlog/new"
                           render={() => <WorkoutForm dispatch={dispatch} />}
                           exact
                         />
