@@ -33,22 +33,26 @@ class App extends Component {
 
                         <Route path="/" component={WorkoutLauncher} exact />
                         <Route
-                          path="/active/:id"
+                          path="/gymlog/active/:id"
                           render={() => (
                             <WorkoutViewer workout={activeWorkout} />
                           )}
                         />
-                        <Route path="/history" component={Calendar} exact />
+                        <Route
+                          path="/gymlog/history"
+                          component={Calendar}
+                          exact
+                        />
 
                         <Route
-                          path="/history/:id"
+                          path="/gymlog/history/:id"
                           render={() => (
                             <WorkoutViewer workout={loggedWorkout} />
                           )}
                         />
 
                         <Route
-                          path="/new"
+                          path="/gymlog/new"
                           render={() => <WorkoutForm dispatch={dispatch} />}
                           exact
                         />

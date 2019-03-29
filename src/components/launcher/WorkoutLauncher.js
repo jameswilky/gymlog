@@ -66,7 +66,7 @@ class WorkoutLauncher extends Component {
                     <React.Fragment>
                       <Link
                         to={{
-                          pathname: `/active/${this.state.nextID}`
+                          pathname: `/gymlog/active/${this.state.nextID}`
                         }}
                       >
                         <div
@@ -95,7 +95,7 @@ class WorkoutLauncher extends Component {
                       </div>
                     </React.Fragment>
                   ) : (
-                    <Link to="/new">
+                    <Link to="/gymlog/new">
                       <div className="main__button red">
                         <i className="fas fa-plus" />
                       </div>
@@ -103,7 +103,7 @@ class WorkoutLauncher extends Component {
                   )}
                 </div>
               ) : (
-                <Redirect to="/new" />
+                <Redirect to="/gymlog/new" />
               )}
             </React.Fragment>
           );
