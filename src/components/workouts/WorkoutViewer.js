@@ -21,7 +21,7 @@ class WorkoutViewer extends Component {
                   isActive={true}
                   dispatch={dispatch}
                 />
-                <Link to={{ pathname: "https://jameswilky.github.io/gymlog" }}>
+                <Link to={{ pathname: "/" }}>
                   <div
                     className="main__button green"
                     // onClick={() => {
