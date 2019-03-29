@@ -74,7 +74,7 @@ const reducer = (state, action) => {
             /* Create an array of numbers equal to the exercise.reps and length exercise.sets*/
             sets: Array(parseInt(exercise.sets)).fill(parseInt(exercise.reps)),
             id: uuid(),
-            tags: ["Clean", "Slow"],
+            tags: [],
             weight: []
           };
         })
