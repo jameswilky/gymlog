@@ -21,8 +21,8 @@ class WorkoutLauncher extends Component {
     }
   };
 
-  containsWorkouts = () => {
-    return typeof this.workouts !== "undefined" && this.workouts.length > 0;
+  containsWorkouts = workouts => {
+    return typeof workouts !== "undefined" && workouts.length > 0;
   };
 
   render() {
@@ -33,13 +33,14 @@ class WorkoutLauncher extends Component {
 
           return (
             <React.Fragment>
-              {this.containsWorkouts.bind(this) ? (
+              {console.log(this)}
+              {this.containsWorkouts(workouts) ? (
                 <div
                   className="content"
                   onClick={e => this.clearSelections(e, dispatch)}
                 >
                   <div className="contentHeading">
-                    {this.containsWorkouts.bind(this) ? (
+                    {this.containsWorkouts(workouts) ? (
                       selectedWorkout.id ? (
                         <h2>Start your Workout!</h2>
                       ) : (
@@ -81,7 +82,15 @@ class WorkoutLauncher extends Component {
                           <i className="fas fa-play" />
                         </div>
                       </Link>
-                      <div className="alt__button red">
+                      <div
+                        className="alt__button red"
+                        onClick={() =>
+                          dispatch({
+                            type: "DELETE_WORKOUT",
+                            payload: { id: selectedWorkout.id }
+                          })
+                        }
+                      >
                         <i className="fa fa-trash" />
                       </div>
                     </React.Fragment>

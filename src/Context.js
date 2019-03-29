@@ -84,6 +84,15 @@ const reducer = (state, action) => {
         workouts: [...state.workouts, newWorkout]
       };
     }
+    case "DELETE_WORKOUT": {
+      return {
+        ...state,
+        workouts: state.workouts.filter(
+          workout => workout.id != action.payload.id
+        ),
+        selectedWorkout: { id: null }
+      };
+    }
     case "UPDATE_WORKOUT_NAME": {
       return {
         ...state,
