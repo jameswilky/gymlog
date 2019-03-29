@@ -25,7 +25,7 @@ class App extends Component {
                     const { loggedWorkout, activeWorkout, dispatch } = value;
                     return (
                       <React.Fragment>
-                        <Route path="/" component={WorkoutLauncher} exact />
+                        <Route path="/" component={WorkoutLauncher} />
                         <Route
                           path="/active/:id"
                           render={() => (
