@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/gymlog/precache-manifest.4ae6210cfa213def6b6ce4e9c5b33c74.js"
+  "/gymlog/precache-manifest.0765cb04f472826c6bfeb9a6c48ffe65.js"
 );
 
 workbox.clientsClaim();
