@@ -87,6 +87,8 @@ input {
   top: 75px;
   bottom: 75px; /* 150px for workout page, maybe*/
   overflow: auto;
+  max-width: 900px;
+  margin: 0 auto;
 }
 .contentHeading {
   height: 50px;
@@ -98,8 +100,8 @@ input {
 /* Main Button*/
 .main__button {
   position: fixed;
-  right: 15px;
   bottom: 85px;
+  right: calc(15px);
   font-size: 1.5em;
   color: white;
   border-radius: 90px;

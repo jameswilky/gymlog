@@ -70,14 +70,14 @@ const reducer = (state, action) => {
         name: workoutName,
         exercises: exercises.map(exercise => {
           return {
-            name: "test",
+            name: exercise.name,
             /* Create an array of numbers equal to the exercise.reps and length exercise.sets*/
             sets: Array(parseInt(exercise.sets)).fill(parseInt(exercise.reps)),
-            id: uuid()
+            id: uuid(),
+            weight: []
           };
         })
       };
-
       console.log(newWorkout);
       return {
         ...state,

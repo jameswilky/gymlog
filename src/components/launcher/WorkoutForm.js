@@ -15,10 +15,22 @@ export default function WorkoutForm(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch({ type: "ADD_WORKOUT", payload: { workoutName, exercises } });
+    let items = [...exercises];
+    items = items.map(item => {
+      return item.name === "" || item.sets === "" || item.reps === ""
+        ? null
+        : item;
+    });
+    const filtered = items.filter(Boolean);
+    console.log(filtered);
+    dispatch({
+      type: "ADD_WORKOUT",
+      payload: { workoutName, exercises: filtered }
+    });
   };
   const handleChange = (e, index, target) => {
-    const items = [...exercises];
+    let items = [...exercises];
+
     const item = { ...items[index] };
     item[target] = e.target.value;
     items[index] = item;

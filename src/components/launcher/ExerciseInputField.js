@@ -9,7 +9,16 @@ export default function ExerciseInputField(props) {
     <div className={styles.exerciseForm}>
       <div>
         <Autocomplete
-          suggestions={["Deadlift", "Squat", "Bicep Curls"]}
+          suggestions={[
+            "Deadlift",
+            "Squat",
+            "Bicep Curls",
+            "Shoulder Press",
+            "Overhead Press",
+            "Bench Press",
+            "Pull Ups",
+            ""
+          ]}
           changeHandler={changeHandler}
           exerciseIndex={index}
         />

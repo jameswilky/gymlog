@@ -19,7 +19,6 @@ export default function ExerciseBody(props) {
       )}
 
       <div className={styles.bodyContent}>
-        {/*id ==exercise id*/}
         {sets.map((reps, set) => (
           <Set
             reps={reps}

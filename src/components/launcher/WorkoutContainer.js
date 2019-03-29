@@ -23,8 +23,8 @@ class WorkoutContainer extends Component {
   };
 
   render() {
-    const { showCard, name } = this.state;
-    const { id, exercises } = this.props.workout;
+    const { showCard } = this.state;
+    const { id, exercises, name } = this.props.workout;
     const { selected } = this.props;
     return (
       <Consumer>
@@ -83,6 +83,7 @@ class WorkoutContainer extends Component {
                   id={id}
                   isActive={false}
                   dispatch={dispatch}
+                  name={name}
                 />
               ) : null}
             </div>

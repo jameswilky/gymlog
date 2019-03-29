@@ -75,7 +75,7 @@ export default function Autocomplete(props) {
       );
     } else {
       SuggestionsListComponent = (
-        <div className={styles.suggestionActive}>
+        <div className={styles.noSuggestions}>
           <em>Create New Exercise</em>
         </div>
       );

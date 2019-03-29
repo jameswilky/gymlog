@@ -13,28 +13,24 @@ class WorkoutViewer extends Component {
           console.log(workout);
           return (
             <div className="content">
+              <div className="contentHeading">
+                <h1>{workout.name}</h1>
+              </div>
+
               <div className="container">
-                <div>{/* <h1>{name}</h1> */}</div>
                 <Workout
                   exercises={workout.exercises}
                   id={workout.id}
                   isActive={true}
                   dispatch={dispatch}
+                  name={workout.name}
                 />
-                <Link to={{ pathname: "/" }}>
-                  <div
-                    className="main__button green"
-                    // onClick={() => {
-                    //   dispatch({
-                    //     type: "SAVE_WORKOUT",
-                    //     payload: activeWorkout
-                    //   });
-                    // }}
-                  >
-                    <i className="fas fa-flag-checkered" />
-                  </div>
-                </Link>
               </div>
+              <Link to={{ pathname: "/" }}>
+                <div className="main__button green">
+                  <i className="fas fa-flag-checkered" />
+                </div>
+              </Link>
             </div>
           );
         }}

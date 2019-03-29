@@ -3,16 +3,13 @@ import Exercise from "../exercises/Exercise";
 import styles from "./workout.module.css";
 
 export default function Workout(props) {
-  const { exercises, isActive, id, dispatch } = props;
+  const { exercises, isActive, id, dispatch, name } = props;
   return (
     <React.Fragment>
-      <div>
-        {exercises.map(exercise => (
-          <Exercise key={exercise.id} exercise={exercise} isActive={isActive} />
-        ))}
-      </div>
-
-      <div>
+      {exercises.map(exercise => (
+        <Exercise key={exercise.id} exercise={exercise} isActive={isActive} />
+      ))}
+      <div className="card">
         <button
           onClick={() =>
             dispatch({ type: "ADD_EXERCISE", payload: { id, isActive } })
