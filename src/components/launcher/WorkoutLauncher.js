@@ -32,75 +32,73 @@ class WorkoutLauncher extends Component {
           const { dispatch, workouts, selectedWorkout } = value;
 
           return (
-                <div
-                  className="content"
-                  onClick={e => this.clearSelections(e, dispatch)}
-                >
-                  <div className="contentHeading">
-                    {this.containsWorkouts(workouts) ? (
-                      selectedWorkout.id ? (
-                        <h2>Start your Workout!</h2>
-                      ) : (
-                        <h2>Select A Workout</h2>
-                      )
-                    ) : (
-                      <h2>Create a Workout</h2>
-                    )}
-                  </div>
-                  <div className="contentBody">
-                    <div className="container">
-                      {workouts.map(workout => (
-                        <WorkoutContainer
-                          key={workout.id}
-                          workout={workout}
-                          selected={selectedWorkout.id == workout.id}
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  {selectedWorkout.id ? (
-                    <React.Fragment>
-                      <Link
-                        to={{
-                          pathname: `/active/${this.state.nextID}`
-                        }}
-                      >
-                        <div
-                          className="main__button green"
-                          onClick={() =>
-                            dispatch({
-                              type: "LOAD_WORKOUT",
-                              payload: this.state.nextID
-                            })
-                          }
-                        >
-                          {" "}
-                          <i className="fas fa-play" />
-                        </div>
-                      </Link>
-                      <div
-                        className="alt__button red"
-                        onClick={() =>
-                          dispatch({
-                            type: "DELETE_WORKOUT",
-                            payload: { id: selectedWorkout.id }
-                          })
-                        }
-                      >
-                        <i className="fa fa-trash" />
-                      </div>
-                    </React.Fragment>
+            <div
+              className="content"
+              onClick={e => this.clearSelections(e, dispatch)}
+            >
+              <div className="contentHeading">
+                {this.containsWorkouts(workouts) ? (
+                  selectedWorkout.id ? (
+                    <h2>Start your Workout!</h2>
                   ) : (
-                    <Link to="/new">
-                      <div className="main__button red">
-                        <i className="fas fa-plus" />
-                      </div>
-                    </Link>
-                  )}
+                    <h2>Select A Workout</h2>
+                  )
+                ) : (
+                  <h2>Create a Workout</h2>
+                )}
+              </div>
+              <div className="contentBody">
+                <div className="container">
+                  {workouts.map(workout => (
+                    <WorkoutContainer
+                      key={workout.id}
+                      workout={workout}
+                      selected={selectedWorkout.id == workout.id}
+                    />
+                  ))}
                 </div>
-           
-            </React.Fragment>
+              </div>
+
+              {selectedWorkout.id ? (
+                <React.Fragment>
+                  <Link
+                    to={{
+                      pathname: `/active/${this.state.nextID}`
+                    }}
+                  >
+                    <div
+                      className="main__button green"
+                      onClick={() =>
+                        dispatch({
+                          type: "LOAD_WORKOUT",
+                          payload: this.state.nextID
+                        })
+                      }
+                    >
+                      {" "}
+                      <i className="fas fa-play" />
+                    </div>
+                  </Link>
+                  <div
+                    className="alt__button red"
+                    onClick={() =>
+                      dispatch({
+                        type: "DELETE_WORKOUT",
+                        payload: { id: selectedWorkout.id }
+                      })
+                    }
+                  >
+                    <i className="fa fa-trash" />
+                  </div>
+                </React.Fragment>
+              ) : (
+                <Link to="/new">
+                  <div className="main__button red">
+                    <i className="fas fa-plus" />
+                  </div>
+                </Link>
+              )}
+            </div>
           );
         }}
       </Consumer>
