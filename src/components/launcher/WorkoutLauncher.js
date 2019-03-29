@@ -33,7 +33,7 @@ class WorkoutLauncher extends Component {
 
           return (
             <React.Fragment>
-              {this.containsWorkouts() ? (
+              {this.containsWorkouts.bind(this) ? (
                 <div
                   className="content"
                   onClick={e => this.clearSelections(e, dispatch)}
@@ -62,33 +62,32 @@ class WorkoutLauncher extends Component {
                   </div>
 
                   {selectedWorkout.id ? (
-                    <Link
-                      to={{
-                        pathname: `/active/${this.state.nextID}`
-                      }}
-                    >
-                      <div
-                        className="main__button green"
-                        onClick={() =>
-                          dispatch({
-                            type: "LOAD_WORKOUT",
-                            payload: this.state.nextID
-                          })
-                        }
+                    <React.Fragment>
+                      <Link
+                        to={{
+                          pathname: `/active/${this.state.nextID}`
+                        }}
                       >
-                        {" "}
-                        <i className="fas fa-play" />
+                        <div
+                          className="main__button green"
+                          onClick={() =>
+                            dispatch({
+                              type: "LOAD_WORKOUT",
+                              payload: this.state.nextID
+                            })
+                          }
+                        >
+                          {" "}
+                          <i className="fas fa-play" />
+                        </div>
+                      </Link>
+                      <div className="alt__button red">
+                        <i className="fa fa-trash" />
                       </div>
-                    </Link>
+                    </React.Fragment>
                   ) : (
                     <Link to="/new">
-                      <div
-                        className="main__button red"
-                        onClick={() =>
-                          // dispatch({ type: "ADD_WORKOUT", payload: null })
-                          console.log("open workout form")
-                        }
-                      >
+                      <div className="main__button red">
                         <i className="fas fa-plus" />
                       </div>
                     </Link>
