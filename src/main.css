@@ -2,6 +2,28 @@
   Specific styles are overwritten in modules specific to each component
 */
 
+/* Hide footer elements when keyboard visible*/
+@media screen and (max-height: 300px) {
+  .footer {
+    position: relative;
+    visibility: hidden;
+    display: none;
+    height: 10px;
+  }
+  .content {
+    min-height: 300px;
+  }
+  .footer .divider {
+    visibility: hidden;
+  }
+  .main__button {
+    visibility: hidden;
+  }
+  .alt__button {
+    visibility: hidden;
+  }
+}
+
 * {
   /* CSS Reset*/
   margin: 0;
