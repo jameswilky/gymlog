@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/gymlog/static/js/runtime~main.7fb47d1b.js"
   },
   {
-    "revision": "9af66345b8de869793dc",
-    "url": "/gymlog/static/js/main.9af66345.chunk.js"
+    "revision": "8993476c772bec7712c7",
+    "url": "/gymlog/static/js/main.8993476c.chunk.js"
   },
   {
     "revision": "abdb7ae37c5b37ce5aa5",
     "url": "/gymlog/static/js/2.abdb7ae3.chunk.js"
   },
   {
-    "revision": "9af66345b8de869793dc",
-    "url": "/gymlog/static/css/main.c6c5d5ff.chunk.css"
+    "revision": "8993476c772bec7712c7",
+    "url": "/gymlog/static/css/main.611b705e.chunk.css"
   },
   {
-    "revision": "4b544b67ea866f68681603189a1d7c06",
+    "revision": "f964df4bbecbaf23dfdcaf9015482bbb",
     "url": "/gymlog/index.html"
   }
 ];

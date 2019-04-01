@@ -1,13 +1,13 @@
 {
-  "main.css": "/gymlog/static/css/main.c6c5d5ff.chunk.css",
-  "main.js": "/gymlog/static/js/main.9af66345.chunk.js",
-  "main.js.map": "/gymlog/static/js/main.9af66345.chunk.js.map",
+  "main.css": "/gymlog/static/css/main.611b705e.chunk.css",
+  "main.js": "/gymlog/static/js/main.8993476c.chunk.js",
+  "main.js.map": "/gymlog/static/js/main.8993476c.chunk.js.map",
   "runtime~main.js": "/gymlog/static/js/runtime~main.7fb47d1b.js",
   "runtime~main.js.map": "/gymlog/static/js/runtime~main.7fb47d1b.js.map",
   "static/js/2.abdb7ae3.chunk.js": "/gymlog/static/js/2.abdb7ae3.chunk.js",
   "static/js/2.abdb7ae3.chunk.js.map": "/gymlog/static/js/2.abdb7ae3.chunk.js.map",
   "index.html": "/gymlog/index.html",
-  "precache-manifest.0765cb04f472826c6bfeb9a6c48ffe65.js": "/gymlog/precache-manifest.0765cb04f472826c6bfeb9a6c48ffe65.js",
+  "precache-manifest.13fe58c6ec40fea2a1644d138781ccc4.js": "/gymlog/precache-manifest.13fe58c6ec40fea2a1644d138781ccc4.js",
   "service-worker.js": "/gymlog/service-worker.js",
-  "static/css/main.c6c5d5ff.chunk.css.map": "/gymlog/static/css/main.c6c5d5ff.chunk.css.map"
+  "static/css/main.611b705e.chunk.css.map": "/gymlog/static/css/main.611b705e.chunk.css.map"
 }
