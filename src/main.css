@@ -3,7 +3,7 @@
 */
 
 /* Hide footer elements when keyboard visible*/
-@media screen and (max-height: 300px) {
+@media screen and (max-height: 400px) {
   .footer {
     position: relative;
     visibility: hidden;
