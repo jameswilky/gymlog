@@ -310,8 +310,13 @@ const reducer = (state, action) => {
 };
 export default class Provider extends Component {
   componentDidMount() {
-    const cachedState = localStorage.getItem("state");
-    this.setState(JSON.parse(cachedState));
+    let cachedState = localStorage.getItem("state");
+    let state = JSON.parse(cachedState);
+    state.history.map(workout => {
+      workout.date = new Date(workout.date);
+    });
+
+    this.setState(state);
   }
   componentDidUpdate() {
     localStorage.setItem("state", JSON.stringify(this.state));
@@ -348,50 +353,6 @@ export default class Provider extends Component {
       //       weight: [10, 10, 10]
       //     }
       //   ]
-      // }
-    ],
-    history: [
-      // {
-      //   id: 1,
-      //   // selected: false,
-      //   name: "Pull Day",
-      //   exercises: [
-      //     {
-      //       id: 3,
-      //       name: "Deadlift",
-      //       sets: [10, 5, 5],
-      //       weight: [10, 10, 10]
-      //     }
-      //   ],
-      //   date: new Date(Date.now())
-      // },
-      // {
-      //   id: 2,
-      //   // selected: false,
-      //   name: "Leg Day",
-      //   exercises: [
-      //     {
-      //       id: 4,
-      //       name: "Squat",
-      //       sets: [5, 5, 5],
-      //       weight: [10, 10, 10]
-      //     }
-      //   ],
-      //   date: new Date(2019, 2, 1)
-      // },
-      // {
-      //   id: 10,
-      //   // selected: false,
-      //   name: "Push Day",
-      //   exercises: [
-      //     {
-      //       id: 45,
-      //       name: "Squat",
-      //       sets: [5, 5, 5],
-      //       weight: [10, 10, 10]
-      //     }
-      //   ],
-      //   date: new Date(2019, 3, 1)
       // }
     ],
     dispatch: action => {
