@@ -287,11 +287,11 @@ const reducer = (state, action) => {
     }
 
     case "SAVE_WORKOUT": {
+      const newWorkout = { ...state.activeWorkout, date: new Date(Date.now()) };
       return {
         ...state,
-        history: [...state.history, state.activeWorkout],
-        activeWorkout: { id: null },
-        date: new Date(Date.now())
+        history: [...state.history, newWorkout],
+        activeWorkout: { id: null }
       };
     }
 

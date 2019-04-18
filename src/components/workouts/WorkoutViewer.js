@@ -27,7 +27,14 @@ class WorkoutViewer extends Component {
                 />
               </div>
               <Link to={{ pathname: "/" }}>
-                <div className="main__button green">
+                <div
+                  className="main__button green"
+                  onClick={() =>
+                    dispatch({
+                      type: "SAVE_WORKOUT"
+                    })
+                  }
+                >
                   <i className="fas fa-flag-checkered" />
                 </div>
               </Link>
